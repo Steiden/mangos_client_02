@@ -1,9 +1,17 @@
-import { Organization } from "@/entities/Organization/types";
+import { OrganizationShort } from "@/entities/Organization/types";
 
 export type Tag = {
-    id: number;
-    name: string;
-    organization: Organization;
-    created_at: Date;
-    updated_at: Date;
-}
+	id: number;
+	name: string;
+	organization: OrganizationShort;
+	created_at: Date;
+	updated_at: Date;
+};
+
+export type TagShort = {
+	id: number;
+	name: string;
+	organization_id: number;
+	created_at: Date;
+	updated_at: Date;
+};

@@ -1,12 +1,12 @@
-import { User } from "@/entities/User/types";
-import { Organization } from "../../types";
-import { Post } from "../../Post/types";
+import { UserShort } from "@/entities/User/types";
+import { OrganizationShort } from "../../types";
+import { PostShort } from "../../Post/types";
 
 export type OrganizationEmployee = {
     id: number;
-    organization: Organization;
-    user: User;
-    post: Post;
+    organization: OrganizationShort;
+    user: UserShort;
+    post: PostShort;
     created_at: Date;
     updated_at: Date;
 }

@@ -1,10 +1,10 @@
-import { User } from "@/entities/User/types";
-import { Task } from "../../types";
+import { UserShort } from "@/entities/User/types";
+import { TaskShort } from "../../types";
 
 export type TaskMember = {
     id: number;
-    task: Task;
-    user: User;
+    task: TaskShort;
+    user: UserShort;
     created_at: Date;
     updated_at: Date;
 }

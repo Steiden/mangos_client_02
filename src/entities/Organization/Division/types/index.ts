@@ -1,9 +1,17 @@
-import { Organization } from "../../types";
+import { OrganizationShort } from "../../types";
 
 export type Division = {
     id: number;
     name: string;
-    organization: Organization;
+    organization: OrganizationShort;
+    created_at: Date;
+    updated_at: Date;
+}
+
+export type DivisionShort = {
+    id: number;
+    name: string;
+    organization_id: number;
     created_at: Date;
     updated_at: Date;
 }
