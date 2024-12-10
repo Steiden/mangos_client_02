@@ -3,6 +3,10 @@ export type AuthorizationData = {
     password: string;
 }
 
+export type AuthorizationResponse = {
+    token: string;
+}
+
 export type RegistrationData = {
     login: string;
     password: string;
