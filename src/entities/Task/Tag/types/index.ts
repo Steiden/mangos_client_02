@@ -15,3 +15,8 @@ export type TagShort = {
 	created_at: Date;
 	updated_at: Date;
 };
+
+export type TagFillable = {
+	name?: string;
+	organization_id?: number;
+}

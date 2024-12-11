@@ -25,3 +25,12 @@ export type OrganizationShort = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type OrganizationFillable = {
+    full_name?: string;
+    name?: string;
+    address?: string;
+    phone?: string;
+    activity_type_id?: number;
+    user_id?: number;
+}

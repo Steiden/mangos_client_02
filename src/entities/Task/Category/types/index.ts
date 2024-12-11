@@ -15,3 +15,8 @@ export type CategoryShort = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type CategoryFillable = {
+    name?: string;
+    organization_id?: number;
+}

@@ -15,3 +15,9 @@ export type DivisionShort = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type DivisionFillable = {
+    name?: string;
+    organization_id?: number;
+    user_id?: number;
+}

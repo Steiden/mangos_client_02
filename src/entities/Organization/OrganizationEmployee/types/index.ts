@@ -10,3 +10,9 @@ export type OrganizationEmployee = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type OrganizationEmployeeFillable = {
+    organization_id?: number;
+    user_id?: number;
+    post_id?: number;
+}

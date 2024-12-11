@@ -4,3 +4,7 @@ export type Role = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type RoleFillable = {
+    name: string;
+}

@@ -8,3 +8,8 @@ export type TaskMember = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type TaskMemberFillable = {
+    task_id?: number;
+    user_id?: number;
+}

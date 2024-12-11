@@ -1,2 +1,2 @@
 export { create, get, getList, remove, update } from "./api";
-export type { ActivityType } from "./types";
+export type { ActivityType, ActivityTypeFillable } from "./types";

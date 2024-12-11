@@ -8,3 +8,8 @@ export type TaskTag = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type TaskTagFillable = {
+    task_id?: number;
+    tag_id?: number;
+}

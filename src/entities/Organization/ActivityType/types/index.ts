@@ -4,3 +4,7 @@ export type ActivityType = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type ActivityTypeFillable = {
+    name?: string;
+}

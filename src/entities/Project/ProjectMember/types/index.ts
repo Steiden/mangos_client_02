@@ -8,3 +8,8 @@ export type ProjectMember = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type ProjectMemberFillable = {
+    project_id?: number;
+    user_id?: number;
+}

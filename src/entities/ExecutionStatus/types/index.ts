@@ -4,3 +4,7 @@ export type ExecutionStatus = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type ExecutionStatusFillable = {
+    name?: string;
+}

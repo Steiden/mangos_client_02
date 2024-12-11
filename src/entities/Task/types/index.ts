@@ -34,3 +34,14 @@ export type TaskShort = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type TaskFillable = {
+    name?: string;
+    description?: string;
+    started_at?: Date;
+    finished_at?: Date;
+    execution_status_id?: number;
+    category_id?: number;
+    user_id?: number;
+    project_id?: number | null;
+}

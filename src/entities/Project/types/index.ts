@@ -26,3 +26,11 @@ export type ProjectShort = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type ProjectFillable = {
+    name?: string;
+    description?: string;
+    avatar?: string;
+    execution_status_id?: number;
+    user_id?: number;
+}

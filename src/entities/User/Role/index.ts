@@ -1,2 +1,2 @@
 export { create, get, getList, remove, update } from "./api";
-export type { Role } from "./types";
+export type { Role, RoleFillable } from "./types";
