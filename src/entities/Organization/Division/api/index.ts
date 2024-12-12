@@ -1,14 +1,14 @@
 import { api, getAxiosConfig, MangosResponse } from "@/shared/api";
 import { endpoints } from "@/shared/api/endpoints";
 import { AxiosResponse } from "axios";
-import { Division } from "../types";
+import { Division, DivisionFillable } from "../types";
 import { handleResponseException } from "@/shared/api/handlers";
 import { ExecException } from "child_process";
 
 export async function getList(token: string): Promise<MangosResponse<Division[]>> {
 	try {
 		const response: AxiosResponse<MangosResponse<Division[]>> = await api.get(
-			endpoints.execution_statuses,
+			endpoints.divisions,
 			getAxiosConfig(token)
 		);
 		return response.data;
@@ -20,7 +20,7 @@ export async function getList(token: string): Promise<MangosResponse<Division[]>
 export async function get(id: number, token: string): Promise<MangosResponse<Division>> {
 	try {
 		const response: AxiosResponse<MangosResponse<Division>> = await api.get(
-			`${endpoints.execution_statuses}/${id}`,
+			`${endpoints.divisions}/${id}`,
 			getAxiosConfig(token)
 		);
 		return response.data;
@@ -29,11 +29,11 @@ export async function get(id: number, token: string): Promise<MangosResponse<Div
 	}
 }
 
-export async function create(name: string, token: string): Promise<MangosResponse<Division>> {
+export async function create(data: DivisionFillable, token: string): Promise<MangosResponse<Division>> {
 	try {
 		const response: AxiosResponse<MangosResponse<Division>> = await api.post(
-			endpoints.execution_statuses,
-			{ name },
+			endpoints.divisions,
+			data,
 			getAxiosConfig(token)
 		);
 		return response.data;
@@ -45,7 +45,7 @@ export async function create(name: string, token: string): Promise<MangosRespons
 export async function update(id: number, name: string, token: string): Promise<MangosResponse<Division>> {
 	try {
 		const response: AxiosResponse<MangosResponse<Division>> = await api.put(
-			`${endpoints.execution_statuses}/${id}`,
+			`${endpoints.divisions}/${id}`,
 			{ name },
 			getAxiosConfig(token)
 		);
@@ -58,7 +58,7 @@ export async function update(id: number, name: string, token: string): Promise<M
 export async function remove(id: number, token: string): Promise<MangosResponse<Division>> {
 	try {
 		const response: AxiosResponse<MangosResponse<Division>> = await api.delete(
-			`${endpoints.execution_statuses}/${id}`,
+			`${endpoints.divisions}/${id}`,
 			getAxiosConfig(token)
 		);
 		return response.data;

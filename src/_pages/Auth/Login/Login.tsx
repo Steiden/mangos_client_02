@@ -11,88 +11,108 @@ import { login } from "@/entities/Auth";
 import { AuthorizationData } from "@/entities/Auth/types";
 import { useUserContext } from "@/shared/context";
 import { me } from "@/entities/Auth/api";
-import { useLocalStorage } from 'usehooks-ts'
-import { LucideAlignHorizontalDistributeStart } from "lucide-react";
+import { useLocalStorage } from "usehooks-ts";
 import { useToast } from "@/shared/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
 const formInfo: React.InputHTMLAttributes<HTMLInputElement>[] = [
-    {
-        type: "text",
-        id: "login",
-        placeholder: "Логин",
-        autoComplete: "login",
-        name: "login",
-    },
-    {
-        type: "password",
-        id: "password",
-        placeholder: "Пароль",
-        autoComplete: "current-password",
-        name: "password",
-    },
+	{
+		type: "text",
+		id: "login",
+		placeholder: "Логин",
+		autoComplete: "login",
+		name: "login",
+	},
+	{
+		type: "password",
+		id: "password",
+		placeholder: "Пароль",
+		autoComplete: "current-password",
+		name: "password",
+	},
 ];
 
 export const Login = () => {
-    const { toast } = useToast();
-    const router = useRouter();
+	const { toast } = useToast();
+	const router = useRouter();
 
-    const { setUser } = useUserContext();
-    const [token, setToken] = useLocalStorage("token", "");
-    const [data, setData] = useState<AuthorizationData>({
-        login: "",
-        password: "",
-    });
+	const { setUser } = useUserContext();
+	const [token, setToken] = useLocalStorage("token", "");
+	const [data, setData] = useState<AuthorizationData>({
+		login: "",
+		password: "",
+	});
 
-    const tryLogin = async () => {
-        const loginResponse = await login(data);
-        if(!loginResponse.success) return null;
-        setToken(loginResponse.data.token);
-        return loginResponse.data.token;
-    }
+	const tryLogin = async () => {
+		const loginResponse = await login(data);
+		if (!loginResponse.success) return null;
+		setToken(loginResponse.data.token);
+		return loginResponse.data.token;
+	};
 
-    const tryMe = async (token: string) => {
-        const meResponse = await me(token);
-        if(!meResponse.success) return false;
-        setUser(meResponse.data);
-        return true;
-    }
+	const tryMe = async (token: string) => {
+		const meResponse = await me(token);
+		if (!meResponse.success) return false;
+		setUser(meResponse.data);
+		return true;
+	};
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
 
-        const loginResult = await tryLogin();
-        if(!loginResult) {
-            toast({ title: "Вход", description: "Вы ввели неправильный логин или пароль" });
-            return;
-        }
+		const loginResult = await tryLogin();
+		if (!loginResult) {
+			toast({
+				variant: "destructive",
+				title: "Вход",
+				description: "Вы ввели неправильный логин или пароль",
+			});
+			return;
+		}
 
-        const meResult = await tryMe(loginResult);
-        if(!meResult) {
-            toast({ title: "Вход", description: "Ошибка при авторизации. Попробуйте позже" });
-            return;
-        }
+		const meResult = await tryMe(loginResult);
+		if (!meResult) {
+			toast({
+				variant: "destructive",
+				title: "Вход",
+				description: "Ошибка при авторизации. Попробуйте позже",
+			});
+			return;
+		}
 
-        toast({ title: "Вход", description: "Вы успешно авторизованы" });
-        router.push("/");
-    }
+		toast({ title: "Вход", description: "Вы успешно авторизованы" });
+		router.push("/");
+	};
 
 	return (
 		<AuthContainer>
 			<form className={clsx("std-container", styles["auth__form"])} onSubmit={handleSubmit}>
-                <h1 className="std-h1">Вход</h1>
+				<h1 className="std-h1">Вход</h1>
 				<div className={styles["auth__form-fields"]}>
-                    {formInfo.map((field) => {
-                        return (
-                            <div className="grid w-full max-w-sm items-center gap-1.5" key={field.id}>
-                                <Label htmlFor={field.name}>{field.placeholder}</Label>
-                                <Input {...field} onChange={(e) => setData({ ...data, [field.name || ""]: e.target.value })} />
-                            </div>
-                        );
-                    })}
-                </div>
-                <Button type="submit" variant="outline" className="std-button">Войти</Button>
-                <Button type="button" variant="link">Забыли пароль?</Button>
+					{formInfo.map((field) => {
+						return (
+							<div
+								className="grid w-full max-w-sm items-center gap-1.5"
+								key={field.id}
+							>
+								<Label htmlFor={field.name}>{field.placeholder}</Label>
+								<Input
+									{...field}
+									placeholder=""
+									onChange={(e) =>
+										setData({ ...data, [field.name || ""]: e.target.value })
+									}
+								/>
+							</div>
+						);
+					})}
+				</div>
+				<Button type="submit" variant="outline" className="std-button">
+					Войти
+				</Button>
+				<Button type="button" variant="link">
+					Забыли пароль?
+				</Button>
 			</form>
 		</AuthContainer>
 	);

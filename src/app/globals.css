@@ -116,8 +116,10 @@ button[type="button"] {
 }
 
 main {
-	min-height: 100dvh;
-	width: 100vw;
+	height: 100%;
+	flex-grow: 1;
+	flex-basis: 0;
+	padding: 10px;
 }
 
 .std-container {
@@ -129,4 +131,11 @@ main {
 }
 .std-h1 {
 	font-size: 32px;
+}
+.std-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
 }

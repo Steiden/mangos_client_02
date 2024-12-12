@@ -1,0 +1,17 @@
+@import "@styles/style.scss";
+
+.header {
+    @include flex($align: center, $justify: space-between, $gap: 20px);
+
+    & {
+        background-color: #fafafa;
+        border-bottom: 1px solid hsl(var(--border));
+        height: 50px;
+        width: 100%;
+        padding: 10px;
+    }
+
+    &__left {
+        @include flex-center($gap: 10px);
+    }
+}

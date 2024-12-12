@@ -1,7 +1,7 @@
 import { api, getAxiosConfig, MangosResponse } from "@/shared/api";
 import { endpoints } from "@/shared/api/endpoints";
 import { AxiosResponse } from "axios";
-import { ExecutionStatus } from "../types";
+import { ExecutionStatus, ExecutionStatusFillable } from "../types";
 import { handleResponseException } from "@/shared/api/handlers";
 import { ExecException } from "child_process";
 
@@ -29,11 +29,11 @@ export async function get(id: number, token: string): Promise<MangosResponse<Exe
 	}
 }
 
-export async function create(name: string, token: string): Promise<MangosResponse<ExecutionStatus>> {
+export async function create(data: ExecutionStatusFillable, token: string): Promise<MangosResponse<ExecutionStatus>> {
 	try {
 		const response: AxiosResponse<MangosResponse<ExecutionStatus>> = await api.post(
 			endpoints.execution_statuses,
-			{ name },
+			data,
 			getAxiosConfig(token)
 		);
 		return response.data;

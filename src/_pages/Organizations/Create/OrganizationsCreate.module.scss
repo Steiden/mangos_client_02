@@ -1,0 +1,20 @@
+@import "@styles/style.scss";
+
+.organizations-create {
+    @include flex-center($direction: column, $gap: 30px);
+
+    &__title {
+    }
+
+    &__form {
+        @include flex-center($direction: column, $gap: 15px);
+
+        & {
+            width: 100%;
+        }
+    }
+
+    &__button {
+
+    }
+}

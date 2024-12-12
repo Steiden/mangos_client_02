@@ -1,14 +1,14 @@
 import { api, getAxiosConfig, MangosResponse } from "@/shared/api";
 import { endpoints } from "@/shared/api/endpoints";
 import { AxiosResponse } from "axios";
-import { OrganizationEmployee } from "../types";
+import { OrganizationEmployee, OrganizationEmployeeFillable } from "../types";
 import { handleResponseException } from "@/shared/api/handlers";
 import { ExecException } from "child_process";
 
 export async function getList(token: string): Promise<MangosResponse<OrganizationEmployee[]>> {
 	try {
 		const response: AxiosResponse<MangosResponse<OrganizationEmployee[]>> = await api.get(
-			endpoints.execution_statuses,
+			endpoints.organization_employees,
 			getAxiosConfig(token)
 		);
 		return response.data;
@@ -20,7 +20,7 @@ export async function getList(token: string): Promise<MangosResponse<Organizatio
 export async function get(id: number, token: string): Promise<MangosResponse<OrganizationEmployee>> {
 	try {
 		const response: AxiosResponse<MangosResponse<OrganizationEmployee>> = await api.get(
-			`${endpoints.execution_statuses}/${id}`,
+			`${endpoints.organization_employees}/${id}`,
 			getAxiosConfig(token)
 		);
 		return response.data;
@@ -29,11 +29,11 @@ export async function get(id: number, token: string): Promise<MangosResponse<Org
 	}
 }
 
-export async function create(name: string, token: string): Promise<MangosResponse<OrganizationEmployee>> {
+export async function create(data: OrganizationEmployeeFillable, token: string): Promise<MangosResponse<OrganizationEmployee>> {
 	try {
 		const response: AxiosResponse<MangosResponse<OrganizationEmployee>> = await api.post(
-			endpoints.execution_statuses,
-			{ name },
+			endpoints.organization_employees,
+			data,
 			getAxiosConfig(token)
 		);
 		return response.data;
@@ -45,7 +45,7 @@ export async function create(name: string, token: string): Promise<MangosRespons
 export async function update(id: number, name: string, token: string): Promise<MangosResponse<OrganizationEmployee>> {
 	try {
 		const response: AxiosResponse<MangosResponse<OrganizationEmployee>> = await api.put(
-			`${endpoints.execution_statuses}/${id}`,
+			`${endpoints.organization_employees}/${id}`,
 			{ name },
 			getAxiosConfig(token)
 		);
@@ -58,7 +58,7 @@ export async function update(id: number, name: string, token: string): Promise<M
 export async function remove(id: number, token: string): Promise<MangosResponse<OrganizationEmployee>> {
 	try {
 		const response: AxiosResponse<MangosResponse<OrganizationEmployee>> = await api.delete(
-			`${endpoints.execution_statuses}/${id}`,
+			`${endpoints.organization_employees}/${id}`,
 			getAxiosConfig(token)
 		);
 		return response.data;

@@ -6,6 +6,7 @@ import { Toaster } from "@/shared/components/ui/toaster";
 import { Header } from "@/widgets/Header/Header";
 import { SidebarProvider } from "@/shared/components/ui/sidebar";
 import { AppSidebar } from "@/widgets/AppSidebar/AppSidebar";
+import { Mangos } from "./Mangos";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -34,10 +35,11 @@ export default function RootLayout({
 				<MangosContextProvider>
 					<SidebarProvider>
 						<AppSidebar />
-						<>
+						<div className="flex flex-col flex-grow">
 							<Header />
 							<main>{children}</main>
-						</>
+							<Mangos />
+						</div>
 					</SidebarProvider>
 				</MangosContextProvider>
 				<Toaster />

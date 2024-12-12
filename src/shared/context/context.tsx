@@ -16,7 +16,6 @@ import { Organization } from "@/entities/Organization/types";
 import { Project } from "@/entities/Project/types";
 import { me } from "@/entities/Auth/api";
 import { useLocalStorage } from "usehooks-ts";
-import { useToast } from "../hooks/use-toast";
 import { useRouter } from "next/navigation";
 
 export const MangosContext = createContext<{
@@ -25,8 +24,11 @@ export const MangosContext = createContext<{
 } | null>(null);
 
 export function MangosContextProvider({ children }: { children: ReactNode }) {
+	const [localUser] = useLocalStorage<User | null>("user", null);
+	const [localOrganization] = useLocalStorage<Organization | null>("organization", null);
+	const [localProject] = useLocalStorage<Project | null>("project", null);
+
 	const router = useRouter();
-	const { toast } = useToast();
 	const [token] = useLocalStorage("token", "");
 
 	const [data, setData] = useState<MangosContextType>({
@@ -34,6 +36,18 @@ export function MangosContextProvider({ children }: { children: ReactNode }) {
 		organization: null,
 		project: null,
 	});
+	const [isInitialized, setIsInitialized] = useState(false);
+	console.log(data.organization, localOrganization);
+
+	useEffect(() => {
+		setTimeout(() => {
+			setData({
+				user: localUser,
+				organization: localOrganization,
+				project: localProject,
+			});
+		}, 1000);
+	}, [localUser, localOrganization, localProject]);
 
 	useEffect(() => {
 		async function getMe() {
@@ -62,6 +76,7 @@ export function MangosContextProvider({ children }: { children: ReactNode }) {
 }
 
 export function useUserContext() {
+	const [, setLocalUser] = useLocalStorage<User | null>("user", null);
 	const context = useContext(MangosContext);
 
 	if (!context) {
@@ -71,11 +86,15 @@ export function useUserContext() {
 	const { data, setData } = context;
 	return {
 		user: data.user,
-		setUser: (user: User | null) => setData({ ...data, user }),
+		setUser: (user: User | null) => {
+			setData({ ...data, user });
+			setLocalUser(user);
+		},
 	};
 }
 
 export function useOrganizationContext() {
+	const [, setLocalOrganization] = useLocalStorage<Organization | null>("organization", null);
 	const context = useContext(MangosContext);
 
 	if (!context) {
@@ -85,11 +104,15 @@ export function useOrganizationContext() {
 	const { data, setData } = context;
 	return {
 		organization: data.organization,
-		setOrganization: (organization: Organization) => setData({ ...data, organization }),
+		setOrganization: (organization: Organization | null) => {
+			setData({ ...data, organization });
+			setLocalOrganization(organization);
+		},
 	};
 }
 
 export function useProjectContext() {
+	const [, setLocalProject] = useLocalStorage<Project | null>("project", null);
 	const context = useContext(MangosContext);
 
 	if (!context) {
@@ -99,6 +122,9 @@ export function useProjectContext() {
 	const { data, setData } = context;
 	return {
 		project: data.project,
-		setProject: (project: Project) => setData({ ...data, project }),
+		setProject: (project: Project | null) => {
+			setData({ ...data, project });
+			setLocalProject(project);
+		},
 	};
 }

@@ -1,14 +1,14 @@
 import { api, getAxiosConfig, MangosResponse } from "@/shared/api";
 import { endpoints } from "@/shared/api/endpoints";
 import { AxiosResponse } from "axios";
-import { TaskTag } from "../types";
+import { TaskTag, TaskTagFillable } from "../types";
 import { handleResponseException } from "@/shared/api/handlers";
 import { ExecException } from "child_process";
 
 export async function getList(token: string): Promise<MangosResponse<TaskTag[]>> {
 	try {
 		const response: AxiosResponse<MangosResponse<TaskTag[]>> = await api.get(
-			endpoints.execution_statuses,
+			endpoints.task_tags,
 			getAxiosConfig(token)
 		);
 		return response.data;
@@ -20,7 +20,7 @@ export async function getList(token: string): Promise<MangosResponse<TaskTag[]>>
 export async function get(id: number, token: string): Promise<MangosResponse<TaskTag>> {
 	try {
 		const response: AxiosResponse<MangosResponse<TaskTag>> = await api.get(
-			`${endpoints.execution_statuses}/${id}`,
+			`${endpoints.task_tags}/${id}`,
 			getAxiosConfig(token)
 		);
 		return response.data;
@@ -29,11 +29,11 @@ export async function get(id: number, token: string): Promise<MangosResponse<Tas
 	}
 }
 
-export async function create(name: string, token: string): Promise<MangosResponse<TaskTag>> {
+export async function create(data: TaskTagFillable, token: string): Promise<MangosResponse<TaskTag>> {
 	try {
 		const response: AxiosResponse<MangosResponse<TaskTag>> = await api.post(
-			endpoints.execution_statuses,
-			{ name },
+			endpoints.task_tags,
+			data,
 			getAxiosConfig(token)
 		);
 		return response.data;
@@ -45,7 +45,7 @@ export async function create(name: string, token: string): Promise<MangosRespons
 export async function update(id: number, name: string, token: string): Promise<MangosResponse<TaskTag>> {
 	try {
 		const response: AxiosResponse<MangosResponse<TaskTag>> = await api.put(
-			`${endpoints.execution_statuses}/${id}`,
+			`${endpoints.task_tags}/${id}`,
 			{ name },
 			getAxiosConfig(token)
 		);
@@ -58,7 +58,7 @@ export async function update(id: number, name: string, token: string): Promise<M
 export async function remove(id: number, token: string): Promise<MangosResponse<TaskTag>> {
 	try {
 		const response: AxiosResponse<MangosResponse<TaskTag>> = await api.delete(
-			`${endpoints.execution_statuses}/${id}`,
+			`${endpoints.task_tags}/${id}`,
 			getAxiosConfig(token)
 		);
 		return response.data;

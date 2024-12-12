@@ -28,9 +28,11 @@ export type ComboBoxItem = {
 type Props = React.HTMLAttributes<HTMLButtonElement> & {
     items?: ComboBoxItem[];
     placeholder?: string;
+    defaultValue?: string;
+    onChange?: (value: string) => any;
 }
 
-export function Combobox({ items, placeholder, className, ...rest }: Props) {
+export function Combobox({ items, placeholder, defaultValue, onChange, className, ...rest }: Props) {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
 
@@ -46,7 +48,7 @@ export function Combobox({ items, placeholder, className, ...rest }: Props) {
         >
           {value
             ? items?.find((item) => item.value === value)?.label
-            : placeholder}
+            : defaultValue ? defaultValue : placeholder}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -63,6 +65,7 @@ export function Combobox({ items, placeholder, className, ...rest }: Props) {
                   onSelect={(currentValue: any) => {
                     setValue(currentValue === value ? "" : currentValue)
                     setOpen(false)
+                    onChange?.(currentValue)
                   }}
                 >
                   <Check

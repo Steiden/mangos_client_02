@@ -1,8 +1,9 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+"use client";
+
+import { Building, ClipboardList, PanelsTopLeft, Settings } from "lucide-react";
 import {
 	Sidebar,
 	SidebarContent,
-	SidebarFooter,
 	SidebarGroup,
 	SidebarGroupContent,
 	SidebarGroupLabel,
@@ -12,55 +13,49 @@ import {
 	SidebarMenuItem,
 } from "@/shared/components/ui/sidebar";
 import { Combobox, ComboBoxItem } from "@/shared/components/ui/combobox";
+import Link from "next/link";
+import { useOrganizationContext, useUserContext } from "@/shared/context";
+import { requestFormReset } from "react-dom";
 
-const items = [
+const commonItems = [
 	{
-		title: "Home",
-		url: "#",
-		icon: Home,
+		title: "Проекты",
+		url: "/projects",
+		icon: PanelsTopLeft,
 	},
 	{
-		title: "Inbox",
-		url: "#",
-		icon: Inbox,
+		title: "Задачи",
+		url: "/tasks",
+		icon: ClipboardList,
 	},
 	{
-		title: "Calendar",
-		url: "#",
-		icon: Calendar,
-	},
-	{
-		title: "Search",
-		url: "#",
-		icon: Search,
-	},
-	{
-		title: "Settings",
-		url: "#",
+		title: "Настройки",
+		url: "/settings",
 		icon: Settings,
 	},
 ];
 
-const comboboxItems: ComboBoxItem[] = [
+const myItems = [
 	{
-		value: "Mangos",
-		label: "Mangos",
-	},
-	{
-		value: "Facebook",
-		label: "Facebook",
-	},
-	{
-		value: "Instagram",
-		label: "Instagram",
-	},
-	{
-		value: "Twitter",
-		label: "Twitter",
+		title: "Моя организация",
+		url: "/organizations/my",
+		icon: Building,
 	},
 ];
 
 export function AppSidebar() {
+	const { organization, setOrganization } = useOrganizationContext();
+	const { user } = useUserContext();
+
+	const comboboxItems: ComboBoxItem[] = user
+		? user?.organizations.map((organization) => {
+				return {
+					value: organization.id.toString(),
+					label: organization.name,
+				};
+		  })
+		: [];
+
 	return (
 		<Sidebar>
 			<SidebarHeader>
@@ -68,24 +63,49 @@ export function AppSidebar() {
 					<SidebarMenuItem>
 						<Combobox
 							items={comboboxItems}
-							placeholder="Сделайте выбор..."
+							placeholder="Выберите организацию..."
+							defaultValue={organization?.name}
 							className="w-[100%]"
+							onChange={(value) => {
+								if(!value || !user) return;
+								const organization = user.organizations.find(o => o.id == +value);
+								if(!organization) return;
+								console.log(organization);
+								setOrganization(organization);
+							}}
 						/>
 					</SidebarMenuItem>
 				</SidebarMenu>
 			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>
-					<SidebarGroupLabel>Application</SidebarGroupLabel>
+					<SidebarGroupLabel>Обычное</SidebarGroupLabel>
 					<SidebarGroupContent>
 						<SidebarMenu>
-							{items.map((item) => (
+							{commonItems.map((item) => (
 								<SidebarMenuItem key={item.title}>
 									<SidebarMenuButton asChild>
-										<a href={item.url}>
+										<Link href={item.url}>
 											<item.icon />
 											<span>{item.title}</span>
-										</a>
+										</Link>
+									</SidebarMenuButton>
+								</SidebarMenuItem>
+							))}
+						</SidebarMenu>
+					</SidebarGroupContent>
+				</SidebarGroup>
+				<SidebarGroup>
+					<SidebarGroupLabel>Мое</SidebarGroupLabel>
+					<SidebarGroupContent>
+						<SidebarMenu>
+							{myItems.map((item) => (
+								<SidebarMenuItem key={item.title}>
+									<SidebarMenuButton asChild>
+										<Link href={item.url}>
+											<item.icon />
+											<span>{item.title}</span>
+										</Link>
 									</SidebarMenuButton>
 								</SidebarMenuItem>
 							))}
