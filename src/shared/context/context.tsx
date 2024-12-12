@@ -6,6 +6,7 @@ import {
 	ReactNode,
 	SetStateAction,
 	useContext,
+	useEffect,
 	useMemo,
 	useState,
 } from "react";
@@ -13,6 +14,10 @@ import { MangosContextType } from "./types";
 import { User } from "@/entities/User/types";
 import { Organization } from "@/entities/Organization/types";
 import { Project } from "@/entities/Project/types";
+import { me } from "@/entities/Auth/api";
+import { useLocalStorage } from "usehooks-ts";
+import { useToast } from "../hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 export const MangosContext = createContext<{
 	data: MangosContextType;
@@ -20,11 +25,35 @@ export const MangosContext = createContext<{
 } | null>(null);
 
 export function MangosContextProvider({ children }: { children: ReactNode }) {
+	const router = useRouter();
+	const { toast } = useToast();
+	const [token] = useLocalStorage("token", "");
+
 	const [data, setData] = useState<MangosContextType>({
 		user: null,
 		organization: null,
 		project: null,
 	});
+
+	useEffect(() => {
+		async function getMe() {
+			const meResponse = await me(token);
+			if (!meResponse.success) {
+				setData({
+					...data,
+					user: null,
+				});
+				router.push("/auth/login");
+				return;
+			}
+			setData({
+				...data,
+				user: meResponse.data,
+			});
+		}
+		getMe();
+	}, []);
+
 	return (
 		<MangosContext.Provider value={useMemo(() => ({ data, setData }), [data])}>
 			{children}

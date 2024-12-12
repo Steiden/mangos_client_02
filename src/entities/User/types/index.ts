@@ -1,3 +1,4 @@
+import { Organization } from "@/entities/Organization";
 import { Role } from "../Role/types";
 
 export type User = {
@@ -12,6 +13,7 @@ export type User = {
     email: string;
     verified_at: Date | null;
     role: Role;
+    organizations: Organization[];
     created_at: Date;
     updated_at: Date;
 }

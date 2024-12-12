@@ -46,15 +46,15 @@ export const Login = () => {
 
     const tryLogin = async () => {
         const loginResponse = await login(data);
-        if(!loginResponse.data.success) return false;
-        setToken(loginResponse.data.data.token);
-        return true;
+        if(!loginResponse.success) return null;
+        setToken(loginResponse.data.token);
+        return loginResponse.data.token;
     }
 
-    const tryMe = async () => {
+    const tryMe = async (token: string) => {
         const meResponse = await me(token);
-        if(!meResponse.data.success) return false;
-        setUser(meResponse.data.data);
+        if(!meResponse.success) return false;
+        setUser(meResponse.data);
         return true;
     }
 
@@ -67,7 +67,7 @@ export const Login = () => {
             return;
         }
 
-        const meResult = await tryMe();
+        const meResult = await tryMe(loginResult);
         if(!meResult) {
             toast({ title: "Вход", description: "Ошибка при авторизации. Попробуйте позже" });
             return;
