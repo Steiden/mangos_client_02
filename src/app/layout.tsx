@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.scss";
+import "./globals.css";
 import { MangosContextProvider } from "@/shared/context";
 import { Toaster } from "@/shared/components/ui/toaster";
 import { Header } from "@/widgets/Header/Header";
+import { SidebarProvider } from "@/shared/components/ui/sidebar";
+import { AppSidebar } from "@/widgets/AppSidebar/AppSidebar";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -30,8 +32,13 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<MangosContextProvider>
-					<Header />
-					<main>{children}</main>
+					<SidebarProvider>
+						<AppSidebar />
+						<>
+							<Header />
+							<main>{children}</main>
+						</>
+					</SidebarProvider>
 				</MangosContextProvider>
 				<Toaster />
 			</body>
