@@ -1,0 +1,35 @@
+@import "@styles/style.scss";
+
+.auth-container {
+	@include flex-center;
+
+	& {
+		height: 100dvh;
+	}
+
+	&__logo-container,
+	&__content {
+		flex-basis: 0;
+		flex-grow: 1;
+		height: 100%;
+	}
+
+	&__logo {
+		position: absolute;
+		top: 15%;
+		left: 50%;
+		translate: -50% 0;
+
+		&-container {
+			position: relative;
+			max-width: clamp(25%, 50vw, 600px);
+		}
+	}
+
+	&__separator {
+		height: 90%;
+	}
+
+	&__content {
+	}
+}

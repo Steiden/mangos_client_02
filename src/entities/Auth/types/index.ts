@@ -10,11 +10,11 @@ export type AuthorizationResponse = {
 export type RegistrationData = {
     login: string;
     password: string;
-    avatar: string | null;
-    first_name: string | null;
-    second_name: string | null;
-    patronymic: string | null;
-    phone: string | null;
+    avatar?: string;
+    first_name?: string;
+    second_name?: string;
+    patronymic?: string;
+    phone?: string;
     email: string;
-    organization_id: number | null;
+    organization_id?: number;
 }

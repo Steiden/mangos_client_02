@@ -1,0 +1,60 @@
+.hidden-desktop {
+	@include desktop {
+		display: none !important;
+	}
+}
+.visible-desktop {
+	@include desktop-above {
+		display: none !important;
+	}
+}
+.hidden-desktop-s {
+	@include desktop-s {
+		display: none !important;
+	}
+}
+.visible-desktop-s {
+	@include desktop-s-above {
+		display: none !important;
+	}
+}
+.hidden-tablet-l {
+	@include tablet-l {
+		display: none !important;
+	}
+}
+.visible-tablet-l {
+	@include tablet-l-above {
+		display: none !important;
+	}
+}
+.hidden-tablet {
+	@include tablet {
+		display: none !important;
+	}
+}
+.visible-tablet {
+	@include tablet-above {
+		display: none !important;
+	}
+}
+.hidden-tablet-s {
+	@include tablet-s {
+		display: none !important;
+	}
+}
+.visible-tablet-s {
+	@include tablet-s-above {
+		display: none !important;
+	}
+}
+.hidden-mobile-l {
+	@include mobile-l {
+		display: none !important;
+	}
+}
+.visible-mobile-l {
+	@include mobile-l-above {
+		display: none !important;
+	}
+}

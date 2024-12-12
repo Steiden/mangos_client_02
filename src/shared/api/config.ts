@@ -5,7 +5,5 @@ export const getAxiosConfig = (token: string = ""): AxiosRequestConfig => {
 		headers: {
 			Authorization: "Bearer " + token,
 		},
-		withCredentials: true,
-		withXSRFToken: true,
 	};
 };

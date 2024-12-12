@@ -1,0 +1,16 @@
+@import "@styles/style.scss";
+
+.auth {
+
+    &__form {
+        @include flex-center($direction: column, $gap: 15px);
+
+        &-fields {
+            @include flex-center($direction: column, $gap: 20px);
+
+            & {
+                width: 100%;
+            }
+        }
+    }
+}

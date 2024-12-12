@@ -1,0 +1,55 @@
+@mixin flex($justify: flex-start, $align: flex-start, $direction: row, $gap: 0, $wrap: nowrap) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+    gap: $gap;
+    flex-wrap: $wrap;
+}
+
+@mixin flex-center($direction: row, $gap: 0, $wrap: nowrap) {
+    @include flex(center, center, $direction, $gap, $wrap);
+}
+
+@mixin grid($rows: auto, $columns: auto, $justify: start, $align: start, $gap) {
+    display: grid;
+    grid-template-rows: $rows;
+    grid-template-columns: $columns;
+    justify-items: $justify;
+    align-items: $align;
+	gap: $gap;
+}
+
+@mixin scrollbar(
+	$width: 5px,
+	$height: auto,
+	$border-radius: 5px,
+	$bg-thumb-color: #2828287e,
+	$bg-track-color: transparent
+) {
+	&:-moz-any(&) {
+	  scrollbar-width: thin;
+	  scrollbar-color: $bg-thumb-color $bg-track-color;
+	}
+
+	&::-webkit-scrollbar {
+		width: $width;
+		height: $height;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: $bg-thumb-color;
+		border-radius: $border-radius;
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: $bg-track-color;
+	}
+}
+
+@mixin font($color: inherit, $size: inherit, $weight: inherit, $family: inherit) {
+	color: $color;
+    font-size: $size;
+    font-weight: $weight;
+    font-family: $family;
+}

@@ -20,3 +20,11 @@ export async function register(data: RegistrationData) {
     );
     return response;
 }
+
+export async function me(token: string) {
+    const response: AxiosResponse<MangosResponse<User>> = await api.get(
+        endpoints.me,
+        getAxiosConfig(token)
+    );
+    return response;
+}
