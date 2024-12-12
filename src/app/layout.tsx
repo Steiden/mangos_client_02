@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { MangosContext } from "@/shared/context";
+import { MangosContext, MangosContextProvider } from "@/shared/context";
 import { Origami } from "lucide-react";
 
 const geistSans = localFont({
@@ -28,18 +28,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-				<MangosContext.Provider
-					value={{
-						data: {
-							user: null,
-							project: null,
-							organization: null,
-						},
-						setData: () => {},
-					}}
-				>
-					{children}
-				</MangosContext.Provider>
+				<MangosContextProvider>{children}</MangosContextProvider>
 			</body>
 		</html>
 	);

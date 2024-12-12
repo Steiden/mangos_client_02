@@ -1,1 +1,1 @@
-export { MangosContext, useOrganizationContext, useProjectContext, useUserContext } from "./context";
+export { MangosContext, MangosContextProvider, useOrganizationContext, useProjectContext, useUserContext } from "./context";
