@@ -48,7 +48,7 @@ export function AppSidebar() {
 	const { user } = useUserContext();
 
 	const comboboxItems: ComboBoxItem[] = user
-		? user?.organizations.map((organization) => {
+		? user?.organizations?.map((organization) => {
 				return {
 					value: organization.id.toString(),
 					label: organization.name,

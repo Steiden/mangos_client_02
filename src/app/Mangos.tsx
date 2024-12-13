@@ -11,7 +11,7 @@ export const Mangos = () => {
 
 	useEffect(() => {
 		if (user) {
-			if (!user?.organizations.length) {
+			if (!user?.organizations?.length) {
 				if (pathname === "/organizations/ask" || pathname === "/organizations/create")
 					return;
 				router.push("/organizations/ask");
