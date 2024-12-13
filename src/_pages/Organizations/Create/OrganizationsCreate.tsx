@@ -46,7 +46,7 @@ const fields: React.InputHTMLAttributes<HTMLInputElement>[] = [
 export const OrganizationsCreate = () => {
 	const router = useRouter();
 	const { setOrganization } = useOrganizationContext();
-	const { user } = useUserContext();
+	const { user, updateUser } = useUserContext();
 	const { toast } = useToast();
 	const [token] = useLocalStorage("token", "");
 
@@ -126,6 +126,7 @@ export const OrganizationsCreate = () => {
 		});
 
 		setOrganization(orgCreateResult);
+		updateUser();
 		router.push("/");
 	};
 
