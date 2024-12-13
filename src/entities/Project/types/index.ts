@@ -33,4 +33,5 @@ export type ProjectFillable = {
     avatar?: string;
     execution_status_id?: number;
     user_id?: number;
+    organization_id?: number;
 }

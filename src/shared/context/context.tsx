@@ -16,7 +16,9 @@ import { Organization } from "@/entities/Organization/types";
 import { Project } from "@/entities/Project/types";
 import { me } from "@/entities/Auth/api";
 import { useLocalStorage } from "usehooks-ts";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { get as getOrganization } from "@/entities/Organization";
+import { get as getProject } from "@/entities/Project";
 
 export const MangosContext = createContext<{
 	data: MangosContextType;
@@ -31,6 +33,7 @@ export function MangosContextProvider({ children }: { children: ReactNode }) {
 	);
 	const [localProject, setLocalProject] = useLocalStorage<Project | null>("project", null);
 
+	const pathname = usePathname();
 	const router = useRouter();
 	const [token] = useLocalStorage("token", "");
 
@@ -55,8 +58,17 @@ export function MangosContextProvider({ children }: { children: ReactNode }) {
 				setData((prev) => ({
 					...prev,
 					user: null,
+					organization: null,
+					project: null,
 				}));
-				router.push("/auth/login");
+
+				setLocalUser(null);
+				setLocalOrganization(null);
+				setLocalProject(null);
+
+				if (pathname !== "/auth/login" && pathname !== "/auth/register")
+					router.push("/auth/login");
+
 				return;
 			}
 			setData((prev) => ({
@@ -81,6 +93,7 @@ export function MangosContextProvider({ children }: { children: ReactNode }) {
 }
 
 export function useUserContext() {
+	const [token] = useLocalStorage("token", "");
 	const context = useContext(MangosContext);
 
 	if (!context) {
@@ -88,6 +101,16 @@ export function useUserContext() {
 	}
 
 	const { data, setData } = context;
+
+	async function updateUser() {
+		const response = await me(token);
+		if (!response.success) return;
+		setData((prev) => ({
+			...prev,
+			user: response.data,
+		}));
+	}
+
 	return {
 		user: data.user,
 		setUser: (user: User | null) =>
@@ -95,10 +118,12 @@ export function useUserContext() {
 				...prev,
 				user,
 			})),
+		updateUser,
 	};
 }
 
 export function useOrganizationContext() {
+	const [token] = useLocalStorage("token", "");
 	const context = useContext(MangosContext);
 
 	if (!context) {
@@ -106,6 +131,17 @@ export function useOrganizationContext() {
 	}
 
 	const { data, setData } = context;
+
+	async function updateOrganization() {
+		if (!data.organization?.id) return;
+		const response = await getOrganization(data.organization?.id, token);
+		if (!response.success) return;
+		setData((prev) => ({
+			...prev,
+			organization: response.data,
+		}));
+	}
+
 	return {
 		organization: data.organization,
 		setOrganization: (organization: Organization | null) =>
@@ -113,10 +149,12 @@ export function useOrganizationContext() {
 				...prev,
 				organization,
 			})),
+		updateOrganization,
 	};
 }
 
 export function useProjectContext() {
+	const [token] = useLocalStorage("token", "");
 	const context = useContext(MangosContext);
 
 	if (!context) {
@@ -124,6 +162,17 @@ export function useProjectContext() {
 	}
 
 	const { data, setData } = context;
+
+	async function updateProject() {
+		if (!data.project?.id) return;
+		const response = await getProject(data.project?.id, token);
+		if (!response.success) return;
+		setData((prev) => ({
+			...prev,
+			project: response.data,
+		}));
+	}
+
 	return {
 		project: data.project,
 		setProject: (project: Project | null) =>
@@ -131,5 +180,6 @@ export function useProjectContext() {
 				...prev,
 				project,
 			})),
+		updateProject,
 	};
 }

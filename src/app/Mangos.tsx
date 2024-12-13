@@ -1,13 +1,15 @@
 "use client";
 
-import { useUserContext } from "@/shared/context";
+import { useOrganizationContext, useUserContext } from "@/shared/context";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export const Mangos = () => {
 	const pathname = usePathname();
 	const router = useRouter();
+
 	const { user } = useUserContext();
+	const { organization, updateOrganization } = useOrganizationContext();
 
 	useEffect(() => {
 		if (user) {
@@ -18,6 +20,8 @@ export const Mangos = () => {
 				return;
 			}
 		}
+
+		updateOrganization();
 	}, [user]);
 
 	return <div></div>;

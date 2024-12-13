@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./main.scss";
 import { MangosContextProvider } from "@/shared/context";
 import { Toaster } from "@/shared/components/ui/toaster";
 import { Header } from "@/widgets/Header/Header";

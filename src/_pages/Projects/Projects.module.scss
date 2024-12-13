@@ -1,0 +1,9 @@
+@import "@styles/style.scss";
+
+.projects {
+    @include flex($direction: column, $gap: 25px);
+
+    &__content {
+        @include flex($direction: column, $gap: 10px);
+    }
+}
