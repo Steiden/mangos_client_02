@@ -1,5 +1,6 @@
 import { ExecutionStatus } from "@/entities/ExecutionStatus/types";
 import { OrganizationShort } from "@/entities/Organization/types";
+import { TaskMiddle } from "@/entities/Task/types";
 import { UserShort } from "@/entities/User/types";
 
 export type Project = {
@@ -11,6 +12,7 @@ export type Project = {
     user: UserShort;
     organization: OrganizationShort;
     members: UserShort[];
+    tasks: TaskMiddle[];
     created_at: Date;
     updated_at: Date;
 }

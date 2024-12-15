@@ -1,0 +1,13 @@
+.task-card {
+    position: relative;
+
+    &__header {
+        padding-top: 7px;
+    }
+
+    &__popover {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+}

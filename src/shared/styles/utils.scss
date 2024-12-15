@@ -1,60 +1,62 @@
+@use "media";
+
 .hidden-desktop {
-	@include desktop {
+	@include media.desktop {
 		display: none !important;
 	}
 }
 .visible-desktop {
-	@include desktop-above {
+	@include media.desktop-above {
 		display: none !important;
 	}
 }
 .hidden-desktop-s {
-	@include desktop-s {
+	@include media.desktop-s {
 		display: none !important;
 	}
 }
 .visible-desktop-s {
-	@include desktop-s-above {
+	@include media.desktop-s-above {
 		display: none !important;
 	}
 }
 .hidden-tablet-l {
-	@include tablet-l {
+	@include media.tablet-l {
 		display: none !important;
 	}
 }
 .visible-tablet-l {
-	@include tablet-l-above {
+	@include media.tablet-l-above {
 		display: none !important;
 	}
 }
 .hidden-tablet {
-	@include tablet {
+	@include media.tablet {
 		display: none !important;
 	}
 }
 .visible-tablet {
-	@include tablet-above {
+	@include media.tablet-above {
 		display: none !important;
 	}
 }
 .hidden-tablet-s {
-	@include tablet-s {
+	@include media.tablet-s {
 		display: none !important;
 	}
 }
 .visible-tablet-s {
-	@include tablet-s-above {
+	@include media.tablet-s-above {
 		display: none !important;
 	}
 }
 .hidden-mobile-l {
-	@include mobile-l {
+	@include media.mobile-l {
 		display: none !important;
 	}
 }
 .visible-mobile-l {
-	@include mobile-l-above {
+	@include media.mobile-l-above {
 		display: none !important;
 	}
 }

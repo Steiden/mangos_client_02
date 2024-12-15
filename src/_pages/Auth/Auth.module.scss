@@ -1,12 +1,12 @@
-@import "@styles/style.scss";
+@use "@styles/mixins";
 
 .auth {
 
     &__form {
-        @include flex-center($direction: column, $gap: 15px);
+        @include mixins.flex-center($direction: column, $gap: 15px);
 
         &-fields {
-            @include flex-center($direction: column, $gap: 20px);
+            @include mixins.flex-center($direction: column, $gap: 20px);
 
             & {
                 width: 100%;

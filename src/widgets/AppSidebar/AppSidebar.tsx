@@ -14,7 +14,7 @@ import {
 } from "@/shared/components/ui/sidebar";
 import { Combobox, ComboBoxItem } from "@/shared/components/ui/combobox";
 import Link from "next/link";
-import { useOrganizationContext, useUserContext } from "@/shared/context";
+import { useOrganizationContext, useProjectContext, useUserContext } from "@/shared/context";
 import { requestFormReset } from "react-dom";
 
 const commonItems = [
@@ -44,6 +44,7 @@ const myItems = [
 ];
 
 export function AppSidebar() {
+	const { setProject } = useProjectContext();
 	const { organization, setOrganization } = useOrganizationContext();
 	const { user } = useUserContext();
 
@@ -70,7 +71,7 @@ export function AppSidebar() {
 								if(!value || !user) return;
 								const organization = user.organizations.find(o => o.id == +value);
 								if(!organization) return;
-								console.log(organization);
+								setProject(null);
 								setOrganization(organization);
 							}}
 						/>

@@ -1,0 +1,7 @@
+@use "@styles/mixins.scss";
+
+.tasks {
+    &__card-grid {
+        @include mixins.grid(auto, repeat(auto-fill, minmax(300px, 1fr)), center, start, 30px);
+    }
+}

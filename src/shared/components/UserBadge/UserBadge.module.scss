@@ -1,0 +1,12 @@
+@use "@styles/mixins";
+
+.user-badge {
+    @include mixins.flex($align: center, $gap: 10px);
+
+    &--left {
+        flex-direction: row;
+    }
+    &--right {
+        flex-direction: row-reverse;
+    }
+}

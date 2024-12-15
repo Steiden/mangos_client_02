@@ -1,5 +1,40 @@
-@import "@styles/style.scss";
+@use "@styles/mixins";
 
 * {
-    @include scrollbar;
+	@include mixins.scrollbar;
+}
+
+.std-container {
+	height: 100%;
+	width: 100%;
+}
+.std-button {
+	min-width: 150px;
+}
+.std-link {
+	padding: 0;
+}
+.std-h1 {
+	font-size: 32px;
+}
+.std-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+}
+.std-page {
+	@include mixins.flex($direction: column, $gap: 25px);
+
+	& {
+		height: 100%;
+		width: 100%;
+		padding: 25px 50px;
+	}
+
+	&__content {
+		@include mixins.flex($direction: column, $gap: 10px);
+	}
 }

@@ -7,16 +7,17 @@ type SelectItemType = {
 };
 
 type Props = {
-	placeholder: string;
+	placeholder?: string;
 	items: SelectItemType[];
+	selectedItem?: SelectItemType;
 	onChange?: (value: string) => any;
-};
+}
 
-export const MangosSelect = ({ placeholder, items, onChange }: Props) => {
+export const MangosSelect = ({ placeholder, items, selectedItem, onChange }: Props) => {
 	return (
 		<Select onValueChange={onChange}>
 			<SelectTrigger className="w-[100%]">
-				<SelectValue placeholder={placeholder} />
+				<SelectValue placeholder={selectedItem?.label || placeholder} />
 			</SelectTrigger>
 			<SelectContent>
 				{items.map((item) => (

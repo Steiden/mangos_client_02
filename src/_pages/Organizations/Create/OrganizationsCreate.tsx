@@ -15,8 +15,10 @@ import { useOrganizationContext, useUserContext } from "@/shared/context";
 import { create } from "@/entities/Organization/OrganizationEmployee/api";
 import { OrganizationEmployeeFillable } from "@/entities/Organization/OrganizationEmployee";
 import { useRouter } from "next/navigation";
+import { FormField } from "@/shared/types/form";
+import { renderField } from "@/features/renderFields";
 
-const fields: React.InputHTMLAttributes<HTMLInputElement>[] = [
+const fields: FormField[] = [
 	{
 		type: "text",
 		id: "full_name",
@@ -41,6 +43,13 @@ const fields: React.InputHTMLAttributes<HTMLInputElement>[] = [
 		name: "phone",
 		placeholder: "Телефон организации",
 	},
+	{
+		type: "combobox",
+		id: "activity_type_id",
+		name: "activity_type_id",
+		placeholder: "Тип активности",
+		data_name: "activityTypes",
+	},
 ];
 
 export const OrganizationsCreate = () => {
@@ -58,14 +67,15 @@ export const OrganizationsCreate = () => {
 		activity_type_id: 0,
 		user_id: 0,
 	});
-	const [activityTypes, setActivtyTypes] = useState<ActivityType[]>([]);
+	const [showData, setShowData] = useState<{
+		activityTypes: ActivityType[];
+	}>({
+		activityTypes: [],
+	});
+
 
 	useEffect(() => {
-		if(user) data.user_id = user.id;
-	}, [user]);
-
-	useEffect(() => {
-		async function getActivityTypes() {
+		async function fetchData() {
 			const activityTypesResponse = await getList(token);
 			if (!activityTypesResponse.success) {
 				toast({
@@ -75,12 +85,14 @@ export const OrganizationsCreate = () => {
 				});
 				return;
 			}
-			setActivtyTypes(activityTypesResponse.data);
+			setShowData({ ...showData, activityTypes: activityTypesResponse.data });
 		}
-		getActivityTypes();
+		fetchData();
 	}, []);
 
 	const tryCreateOrganization = async () => {
+		data.user_id = user?.id;
+
 		const orgCreateResponse = await createOrganization(data, token);
 		if (!orgCreateResponse.success) {
 			toast({
@@ -96,8 +108,8 @@ export const OrganizationsCreate = () => {
 	const tryLinkOrganization = async (organization_id: number) => {
 		const linkData: OrganizationEmployeeFillable = {
 			organization_id,
-            user_id: user?.id,
-		}
+			user_id: user?.id,
+		};
 
 		const orgLinkResponse = await create(linkData, token);
 		if (!orgLinkResponse.success) {
@@ -139,27 +151,13 @@ export const OrganizationsCreate = () => {
 				{fields.map((field) => (
 					<div className="grid w-full max-w-sm items-center gap-1.5" key={field.id}>
 						<Label htmlFor={field.name}>{field.placeholder}</Label>
-						<Input
-							{...field}
-							placeholder=""
-							onChange={(e) =>
-								setData({ ...data, [field.name || ""]: e.target.value })
-							}
-						/>
+						{renderField(
+							field,
+							(value) => setData({ ...data, [field.name]: value }),
+							showData
+						)}
 					</div>
 				))}
-
-				<div className="grid w-full max-w-sm items-center gap-1.5">
-					<Label htmlFor="activity_type_id">Тип активности</Label>
-					<MangosSelect
-						placeholder="Выберите тип активности"
-						items={activityTypes.map((item) => ({
-							label: item.name,
-							value: item.id.toString(),
-						}))}
-						onChange={(value) => setData({ ...data, activity_type_id: +value })}
-					/>
-				</div>
 
 				<Button
 					variant="outline"

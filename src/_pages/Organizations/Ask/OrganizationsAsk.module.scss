@@ -1,7 +1,7 @@
-@import "@styles/style.scss";
+@use "@styles/mixins";
 
 .organizations-ask {
-    @include flex($align: center, $direction: column, $gap: 10px);
+    @include mixins.flex($align: center, $direction: column, $gap: 10px);
 
     & {
         margin-top: 150px;

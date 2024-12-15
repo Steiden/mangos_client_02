@@ -1,9 +1,10 @@
-@import "@styles/style.scss";
+@use "@styles/mixins";
+@use "@styles/media";
 
 .auth-container {
-	@include flex-center;
+	@include mixins.flex-center;
 
-	@include tablet-l {
+	@include media.tablet-l {
 		flex-direction: column;
 	}
 

@@ -121,27 +121,3 @@ main {
 	flex-basis: 0;
 	padding: 10px;
 }
-
-.std-container {
-	height: 100%;
-	width: 100%;
-}
-.std-button {
-	min-width: 150px;
-}
-.std-h1 {
-	font-size: 32px;
-}
-.std-center {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	height: 100%;
-	width: 100%;
-}
-.std-page {
-	height: 100%;
-	width: 100%;
-	padding: 25px 50px;
-}

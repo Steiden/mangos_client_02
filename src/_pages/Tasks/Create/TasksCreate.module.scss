@@ -1,6 +1,6 @@
 @use "@styles/mixins";
 
-.organizations-create {
+.tasks-create {
     @include mixins.flex-center($direction: column, $gap: 30px);
 
     &__title {

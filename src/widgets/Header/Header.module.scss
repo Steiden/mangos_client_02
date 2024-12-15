@@ -1,7 +1,7 @@
-@import "@styles/style.scss";
+@use "@styles/mixins";
 
 .header {
-    @include flex($align: center, $justify: space-between, $gap: 20px);
+    @include mixins.flex($align: center, $justify: space-between, $gap: 20px);
 
     & {
         background-color: #fafafa;
@@ -12,6 +12,6 @@
     }
 
     &__left {
-        @include flex-center($gap: 10px);
+        @include mixins.flex-center($gap: 10px);
     }
 }
