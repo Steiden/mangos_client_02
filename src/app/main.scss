@@ -4,37 +4,52 @@
 	@include mixins.scrollbar;
 }
 
-.std-container {
-	height: 100%;
-	width: 100%;
-}
-.std-button {
-	min-width: 150px;
-}
-.std-link {
-	padding: 0;
-}
-.std-h1 {
-	font-size: 32px;
-}
-.std-center {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	height: 100%;
-	width: 100%;
-}
-.std-page {
-	@include mixins.flex($direction: column, $gap: 25px);
-
-	& {
-		height: 100%;
+.std {
+	&-container {
 		width: 100%;
-		padding: 25px 50px;
+		height: 100%;
+
+		&__content {
+			@include mixins.flex($direction: column, $gap: 25px);
+
+			& {
+				margin-top: 50px;
+			}
+		}
 	}
 
-	&__content {
-		@include mixins.flex($direction: column, $gap: 10px);
+	&-button {
+		min-width: 150px;
+	}
+
+	&-link {
+		padding: 0;
+	}
+
+	&-h1 {
+		font-size: 32px;
+	}
+
+	&-center {
+		@include mixins.flex-center($direction: column);
+
+		& {
+			height: 100%;
+			width: 100%;
+		}
+	}
+	
+	&-page {
+		@include mixins.flex($direction: column, $gap: 25px);
+	
+		& {
+			height: 100%;
+			width: 100%;
+			padding: 25px 50px;
+		}
+	
+		&__content {
+			@include mixins.flex($direction: column, $gap: 10px);
+		}
 	}
 }

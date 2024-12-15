@@ -1,12 +1,28 @@
 @use "@styles/mixins";
 
 .user-badge {
-    @include mixins.flex($align: center, $gap: 10px);
+	@include mixins.flex($align: center, $gap: 10px);
 
-    &--left {
-        flex-direction: row;
-    }
-    &--right {
-        flex-direction: row-reverse;
-    }
+	&--left {
+		flex-direction: row;
+	}
+	&--right {
+		flex-direction: row-reverse;
+	}
+
+	&--small {
+		.user-badge {
+			&__avatar {
+				height: 35px;
+				width: 35px;
+			}
+            &__name {
+                font-size: 15px;
+            }
+		}
+	}
+	&--medium {
+	}
+	&--large {
+	}
 }

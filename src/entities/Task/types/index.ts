@@ -3,6 +3,7 @@ import { TaskPriority } from "../TaskPriority/types";
 import { CategoryShort } from "../Category/types";
 import { UserShort } from "@/entities/User/types";
 import { ProjectShort } from "@/entities/Project/types";
+import { TaskMember } from "../TaskMember";
 
 export type Task = {
     id: number;
@@ -15,23 +16,10 @@ export type Task = {
     category: CategoryShort;
     user: UserShort;
     project: ProjectShort | null;
-    members: UserShort[];
+    members: TaskMember[];
     created_at: Date;
     updated_at: Date;
 }
-
-// 'id' => $this->id,
-// 'name' => $this->name,
-// 'description' => $this->description,
-// 'started_at' => $this->started_at,
-// 'finished_at' => $this->finished_at,
-// 'execution_status' => new ExecutionStatusResource(ExecutionStatus::where('id', $this->execution_status_id)->first()),
-// 'task_priority' => new TaskPriorityResource(TaskPriority::where('id', $this->task_priority_id)->first()),
-// 'category' => new CategoryShortResource(Category::where('id', $this->category_id)->first()),
-// 'user' => new UserShortResource(User::where('id', $this->user_id)->first()),
-// 'project' => new ProjectShortResource(Project::where('id', $this->project_id)->first()),
-// 'created_at' => $this->created_at,
-// 'updated_at' => $this->updated_at,
 
 export type TaskMiddle = {
     id: number;

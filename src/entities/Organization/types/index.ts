@@ -2,6 +2,7 @@ import { UserShort } from "@/entities/User/types";
 import { ActivityType } from "../ActivityType/types";
 import { ProjectShort } from "@/entities/Project";
 import { CategoryShort, TagShort } from "@/entities/Task";
+import { OrganizationEmployee } from "../OrganizationEmployee";
 
 export type Organization = {
     id: number;
@@ -11,7 +12,7 @@ export type Organization = {
     phone: string;
     activity_type: ActivityType;
     user: UserShort;
-    members: UserShort[];
+    members: OrganizationEmployee[];
     projects: ProjectShort[];
     categories: CategoryShort[];
     tags: TagShort[];

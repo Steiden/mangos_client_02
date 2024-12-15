@@ -1,0 +1,36 @@
+@use "@styles/mixins";
+
+.card {
+	@include mixins.flex($justify: space-between, $align: center, $gap: 25px);
+
+	& {
+		// background: #f4f4f5;
+		border-radius: 1rem;
+		padding: 15px 25px;
+        width: 100%;
+
+		transition-duration: .3s;
+	}
+	&--small {
+		padding: 5px 8px;
+		border-radius: 0.5rem;
+	}
+	&--large {
+		padding: 20px 30px;
+	}
+	&:hover {
+		background: #f9f9f9;
+	}
+
+	&__content {
+        @include mixins.flex($gap: 15px);
+	}
+
+	&__info {
+        @include mixins.flex($direction: column, $gap: 2px);
+	}
+
+	&__actions {
+        @include mixins.flex($align: center, $gap: 10px);
+	}
+}

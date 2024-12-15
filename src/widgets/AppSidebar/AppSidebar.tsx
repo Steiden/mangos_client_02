@@ -68,11 +68,18 @@ export function AppSidebar() {
 							defaultValue={organization?.name}
 							className="w-[100%]"
 							onChange={(value) => {
-								if(!value || !user) return;
-								const organization = user.organizations.find(o => o.id == +value);
-								if(!organization) return;
+								if (
+									!value ||
+									!user ||
+									value.toString() == organization?.id.toString()
+								)
+									return;
+								const organizationSearched = user.organizations.find(
+									(o) => o.id == +value
+								);
+								if (!organizationSearched) return;
 								setProject(null);
-								setOrganization(organization);
+								setOrganization(organizationSearched);
 							}}
 						/>
 					</SidebarMenuItem>
