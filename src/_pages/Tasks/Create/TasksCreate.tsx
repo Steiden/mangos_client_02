@@ -10,12 +10,13 @@ import { useToast } from "@/shared/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import {
 	Category,
+	CategoryShort,
 	create as createTask,
 	TaskFillable,
 	TaskMemberFillable,
 	TaskPriority,
 } from "@/entities/Task";
-import { useProjectContext, useUserContext } from "@/shared/context";
+import { useOrganizationContext, useProjectContext, useUserContext } from "@/shared/context";
 import { getList as getCategory } from "@/entities/Task/Category/api";
 import { create as createTaskMember } from "@/entities/Task/TaskMember";
 import { FormField } from "@/shared/types/form";
@@ -67,6 +68,7 @@ const fields: FormField[] = [
 export const TasksCreate = () => {
 	const router = useRouter();
 	const { user } = useUserContext();
+	const { organization } = useOrganizationContext();
 	const { project } = useProjectContext();
 	const { toast } = useToast();
 	const [token] = useLocalStorage("token", "");
@@ -77,30 +79,34 @@ export const TasksCreate = () => {
 		started_at: new Date(),
 		finished_at: new Date(),
 		execution_status_id: ExecutionStatuses.in_progress,
-        task_priority_id: 0,
+		task_priority_id: 0,
 		category_id: 0,
 		user_id: 0,
 		project_id: 0,
 	});
 	const [showData, setShowData] = useState<{
 		taskPriorities: TaskPriority[];
-		categories: Category[];
+		categories: CategoryShort[];
 	}>({
 		taskPriorities: [],
 		categories: [],
 	});
 
+	
+	useEffect(() => {
+		if(organization) setShowData({...showData, categories: organization.categories});
+	}, [organization]);
+
 	useEffect(() => {
 		async function fetchData() {
 			try {
 				const taskPrioritiesResponse = await getTaskPriorities(token);
-				const categoryResponse = await getCategory(token);
 
 				setShowData({
+					...showData,
 					taskPriorities: taskPrioritiesResponse.success
 						? taskPrioritiesResponse.data
 						: [],
-					categories: categoryResponse.success ? categoryResponse.data : [],
 				});
 			} catch {
 				toast({
@@ -114,8 +120,8 @@ export const TasksCreate = () => {
 	}, [token]);
 
 	const tryCreateTask = async () => {
-        data.user_id = user?.id;
-        data.project_id = project?.id;
+		data.user_id = user?.id;
+		data.project_id = project?.id;
 
 		const taskCreateResponse = await createTask(data, token);
 		if (!taskCreateResponse.success) {

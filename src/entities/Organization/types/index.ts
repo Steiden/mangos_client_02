@@ -1,6 +1,7 @@
 import { UserShort } from "@/entities/User/types";
 import { ActivityType } from "../ActivityType/types";
 import { ProjectShort } from "@/entities/Project";
+import { CategoryShort, TagShort } from "@/entities/Task";
 
 export type Organization = {
     id: number;
@@ -12,6 +13,8 @@ export type Organization = {
     user: UserShort;
     members: UserShort[];
     projects: ProjectShort[];
+    categories: CategoryShort[];
+    tags: TagShort[];
     created_at: Date;
     updated_at: Date;
 }
