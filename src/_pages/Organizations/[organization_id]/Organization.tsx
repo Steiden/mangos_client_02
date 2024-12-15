@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./OrganizationsMy.module.scss";
+import styles from "./Organization.module.scss";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
 import clsx from "clsx";
 import { BadgeInfoIcon, SettingsIcon, UserIcon } from "lucide-react";
@@ -9,7 +9,7 @@ import { OrganizationMembers } from "./OrganizationMembers";
 import { OrganizationSettings } from "./OrganizationSettings";
 
 
-export const OrganizationsMy = () => {
+export const Organization = () => {
     return (
 		<Tabs orientation="vertical" defaultValue="about" className={clsx(styles["organization"])}>
 			<TabsList className={clsx(styles["organization__tabs"])}>

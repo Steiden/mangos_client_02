@@ -110,7 +110,7 @@ export const UserMemberCard = ({
 					</span>
 					{"organization" in member && (
 						<span className="text-xs">
-							{(member as OrganizationEmployee).post.name}
+							{(member as OrganizationEmployee).post?.name}
 						</span>
 					)}
 				</div>
