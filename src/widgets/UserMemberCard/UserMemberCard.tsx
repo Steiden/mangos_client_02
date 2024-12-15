@@ -6,13 +6,14 @@ import clsx from "clsx";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/components/ui/popover";
 import { EllipsisVerticalIcon, Trash2Icon, UserPenIcon } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
-import { remove } from "@/entities/Project/ProjectMember";
 import { useLocalStorage } from "usehooks-ts";
 import { useToast } from "@/shared/hooks/use-toast";
-import { useProjectContext, useUserContext } from "@/shared/context";
+import { useOrganizationContext, useProjectContext, useUserContext } from "@/shared/context";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar";
 import { OrganizationEmployee } from "@/entities/Organization/OrganizationEmployee";
 import { TaskMember } from "@/entities/Task";
+import { useTaskContext } from "@/shared/context/context";
+import { remove } from "@/entities/Task/TaskMember/api";
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
 	member: ProjectMember | OrganizationEmployee | TaskMember;
@@ -28,7 +29,9 @@ export const UserMemberCard = ({
 	...rest
 }: Props) => {
 	const { toast } = useToast();
+	const { updateTask } = useTaskContext();
 	const { project, updateProject } = useProjectContext();
+	const { updateOrganization } = useOrganizationContext();
 	const { user } = useUserContext();
 	const [token] = useLocalStorage("token", "");
 
@@ -43,7 +46,9 @@ export const UserMemberCard = ({
 			return;
 		}
 
+		updateTask();
 		updateProject();
+		updateOrganization();
 		toast({
 			title: "Удаление сотрудника из проекта",
 			description: "Сотрудник удален из проекта",
@@ -78,7 +83,7 @@ export const UserMemberCard = ({
 								<EllipsisVerticalIcon />
 							</PopoverTrigger>
 							<PopoverContent className="flex flex-col gap-1 bg-white p-1 border-2 rounded-xl w-[auto]">
-								{user?.id === project?.user.id && (
+								{user?.id === project?.user.id && "organization" in member && (
 									<Button
 										variant="ghost"
 										className="justify-start h-[30px]"

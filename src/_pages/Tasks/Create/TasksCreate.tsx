@@ -9,7 +9,6 @@ import { useLocalStorage } from "usehooks-ts";
 import { useToast } from "@/shared/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import {
-	Category,
 	CategoryShort,
 	create as createTask,
 	TaskFillable,
@@ -17,7 +16,6 @@ import {
 	TaskPriority,
 } from "@/entities/Task";
 import { useOrganizationContext, useProjectContext, useUserContext } from "@/shared/context";
-import { getList as getCategory } from "@/entities/Task/Category/api";
 import { create as createTaskMember } from "@/entities/Task/TaskMember";
 import { FormField } from "@/shared/types/form";
 import { renderField } from "@/features/renderFields";

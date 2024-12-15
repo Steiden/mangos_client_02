@@ -9,7 +9,7 @@ import {
 	CardTitle,
 } from "@/shared/components/ui/card";
 import styles from "./TaskCard.module.scss";
-import { remove } from "@/entities/Task";
+import { get, remove } from "@/entities/Task";
 import clsx from "clsx";
 import { UserBadge } from "@/shared/components/UserBadge/UserBadge";
 import { Popover, PopoverTrigger } from "@/shared/components/ui/popover";
@@ -21,16 +21,26 @@ import { useLocalStorage } from "usehooks-ts";
 import { useToast } from "@/shared/hooks/use-toast";
 import { useProjectContext } from "@/shared/context";
 import { TaskMiddle } from "@/entities/Task/types";
+import { useTaskContext } from "@/shared/context/context";
 
 type Props = {
 	task: TaskMiddle;
 };
 
 export const TaskCard = ({ task }: Props) => {
+	const router = useRouter();
 	const { toast } = useToast();
+	const { setTask } = useTaskContext();
 	const { updateProject } = useProjectContext();
 	const [token] = useLocalStorage("token", "");
-	const router = useRouter();
+	
+	const handleShow = async () => {
+		const response = await get(task.id, token);
+		if(!response.success) return;
+		setTask(response.data);
+
+		router.push(`/tasks/${task.id}`);
+	};
 
 	const handleDelete = async () => {
 		const response = await remove(task.id, token);
@@ -59,18 +69,10 @@ export const TaskCard = ({ task }: Props) => {
 					<Button
 						variant="ghost"
 						className="justify-start h-[30px]"
-						onClick={() => router.push(`/tasks/${task.id}`)}
+						onClick={handleShow}
 					>
 						<EyeIcon />
 						Посмотреть
-					</Button>
-					<Button
-						variant="ghost"
-						className="justify-start h-[30px]"
-						onClick={() => router.push(`/tasks/${task.id}`)}
-					>
-						<EditIcon />
-						Редактировать
 					</Button>
 					<Button
 						variant="ghost"

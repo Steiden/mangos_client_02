@@ -1,17 +1,139 @@
 "use client";
 
-import { useProjectContext } from "@/shared/context";
+import { getList as getExecutionStatuses } from "@/entities/ExecutionStatus";
+import { ProjectFillable, update } from "@/entities/Project";
+import { renderField } from "@/features/renderFields";
+import { Button } from "@/shared/components/ui/button";
+import { Label } from "@/shared/components/ui/label";
+import { useOrganizationContext, useProjectContext } from "@/shared/context";
+import { useToast } from "@/shared/hooks/use-toast";
+import { FormField } from "@/shared/types/form";
 import clsx from "clsx";
+import { useEffect, useState } from "react";
+import { useLocalStorage } from "usehooks-ts";
 
 export const ProjectSettings = () => {
-    const { project } = useProjectContext();
+	const [token] = useLocalStorage("token", "");
+	const { toast } = useToast();
+	const { project, updateProject } = useProjectContext();
+	const { updateOrganization } = useOrganizationContext();
 
-    
+	const [data, setData] = useState<ProjectFillable>({
+		name: project?.name || "",
+		description: project?.description || "",
+		execution_status_id: project?.execution_status.id || 0,
+	});
+	const [showData, setShowData] = useState<{
+		executionStatuses: { id: number; name: string }[];
+	}>({
+		executionStatuses: [],
+	});
+
+	const fields: FormField[] = [
+		{
+			type: "text",
+			id: "name",
+			name: "name",
+			placeholder: "Название задачи",
+			value: data.name,
+		},
+		{
+			type: "text",
+			id: "description",
+			name: "description",
+			placeholder: "Описание задачи",
+			value: data.description,
+		},
+		{
+			type: "combobox",
+			id: "execution_status_id",
+			name: "execution_status_id",
+			placeholder: "Статус выполнения",
+			data_name: "executionStatuses",
+			value: {
+				id: showData.executionStatuses.find((item) => item.id === data.execution_status_id)?.id || 0,
+				name: showData.executionStatuses.find((item) => item.id === data.execution_status_id)?.name || "",
+			},
+		},
+	];
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		if (!project) {
+			toast({
+				variant: "destructive",
+				title: "Сохранение проекта",
+				description: "Выберите проект для сохранения его настроек",
+			});
+			return;
+		}
+
+		const response = await update(project?.id, data, token);
+		if (!response.success) {
+			toast({
+				variant: "destructive",
+				title: "Сохранение проекта",
+				description: "При сохранении проекта произошла ошибка. Попробуйте позже",
+			});
+			return;
+		}
+
+		updateProject();
+		updateOrganization();
+		toast({
+			title: "Сохранение проекта",
+			description: "Настройки проекта успешно сохранены",
+		});
+	};
+
+	useEffect(() => {
+		async function fetchData() {
+			const response = await getExecutionStatuses(token);
+			if (!response.success) {
+				toast({
+					variant: "destructive",
+					title: "Загрузка страница",
+					description: "При загрузке страницы произошла ошибка. Попробуйте позж",
+				});
+				return;
+			}
+
+			setShowData({
+				...showData,
+				executionStatuses: response.data.map((status) => {
+					return {
+						id: status.id,
+						name: status.caption,
+					};
+				}),
+			});
+		}
+		fetchData();
+	}, []);
+
 	return (
 		<section className={clsx("std-container")}>
-			<h1 className={clsx("std-h1")}>Настройки</h1>
+			<div>
+				<h1 className={clsx("std-h1")}>Настройки</h1>
+				<p>Настройте параметры вашего проекта</p>
+			</div>
 
-			<p className={clsx()}>{project?.description}</p>
+			<form className={clsx("std-container__content")} onSubmit={handleSubmit}>
+				{fields.map((field) => (
+					<div className="grid w-full max-w-sm items-center gap-1.5" key={field.id}>
+						<Label htmlFor={field.name}>{field.placeholder}</Label>
+						{renderField(
+							field,
+							(value) => setData({ ...data, [field.name]: value }),
+							showData
+						)}
+					</div>
+				))}
+				<Button variant="outline" type="submit" className={clsx("std-button")}>
+					Сохранить
+				</Button>
+			</form>
 		</section>
 	);
 };

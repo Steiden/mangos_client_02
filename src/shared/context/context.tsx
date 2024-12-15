@@ -19,6 +19,7 @@ import { useLocalStorage } from "usehooks-ts";
 import { usePathname, useRouter } from "next/navigation";
 import { get as getOrganization } from "@/entities/Organization";
 import { get as getProject } from "@/entities/Project";
+import { get as getTask, Task } from "@/entities/Task";
 
 export const MangosContext = createContext<{
 	data: MangosContextType;
@@ -32,6 +33,7 @@ export function MangosContextProvider({ children }: { children: ReactNode }) {
 		null
 	);
 	const [localProject, setLocalProject] = useLocalStorage<Project | null>("project", null);
+	const [localTask, setLocalTask] = useLocalStorage<Task | null>("task", null);
 
 	const pathname = usePathname();
 	const router = useRouter();
@@ -41,6 +43,7 @@ export function MangosContextProvider({ children }: { children: ReactNode }) {
 		user: null,
 		organization: null,
 		project: null,
+		task: null,
 	});
 
 	useEffect(() => {
@@ -48,6 +51,7 @@ export function MangosContextProvider({ children }: { children: ReactNode }) {
 			...prev,
 			organization: localOrganization,
 			project: localProject,
+			task: localTask,
 		}));
 	}, []);
 
@@ -83,6 +87,7 @@ export function MangosContextProvider({ children }: { children: ReactNode }) {
 		if (data.user) setLocalUser(data.user);
 		if (data.organization) setLocalOrganization(data.organization);
 		if (data.project) setLocalProject(data.project);
+		if (data.task) setLocalTask(data.task);
 	}, [data]);
 
 	return (
@@ -181,5 +186,36 @@ export function useProjectContext() {
 				project,
 			})),
 		updateProject,
+	};
+}
+
+export function useTaskContext() {
+	const [token] = useLocalStorage("token", "");
+	const context = useContext(MangosContext);
+
+	if (!context) {
+		throw new Error("useTaskContext must be used within a TaskProvider");
+	}
+
+	const { data, setData } = context;
+
+	async function updateTask() {
+		if (!data.task?.id) return;
+		const response = await getTask(data.task?.id, token);
+		if (!response.success) return;
+		setData((prev) => ({
+			...prev,
+			task: response.data,
+		}));
+	}
+
+	return {
+		task: data.task,
+		setTask: (task: Task | null) =>
+			setData((prev) => ({
+				...prev,
+				task,
+			})),
+		updateTask,
 	};
 }

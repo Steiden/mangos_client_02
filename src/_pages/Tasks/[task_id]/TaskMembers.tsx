@@ -1,6 +1,7 @@
 "use client";
 
-import { create, ProjectMemberFillable } from "@/entities/Project/ProjectMember";
+import { TaskMemberFillable } from "@/entities/Task";
+import { create } from "@/entities/Task/TaskMember/api";
 import { buttonVariants } from "@/shared/components/ui/button";
 import {
 	Command,
@@ -19,22 +20,22 @@ import {
 	DialogTrigger,
 } from "@/shared/components/ui/dialog";
 import { useOrganizationContext, useProjectContext } from "@/shared/context";
+import { useTaskContext } from "@/shared/context/context";
 import { useToast } from "@/shared/hooks/use-toast";
 import { UserMemberCard } from "@/widgets/UserMemberCard/UserMemberCard";
 import clsx from "clsx";
 import { useLocalStorage } from "usehooks-ts";
 
-export const ProjectMembers = () => {
+export const TaskMembers = () => {
 	const [token] = useLocalStorage("token", "");
 	const { toast } = useToast();
-	const { organization } = useOrganizationContext();
-	const { project, updateProject } = useProjectContext();
-
-	// const [isModalOpen, setIsModalOpen] = useState(false);
+	const { task, updateTask } = useTaskContext();
+	const { updateProject } = useProjectContext();
+    const { organization } = useOrganizationContext();
 
 	const handleLinkToProject = async (userId: number) => {
-		const data: ProjectMemberFillable = {
-			project_id: project?.id,
+		const data: TaskMemberFillable = {
+			task_id: task?.id,
 			user_id: userId,
 		};
 
@@ -42,16 +43,17 @@ export const ProjectMembers = () => {
 		if (!response.success) {
 			toast({
 				variant: "destructive",
-				title: "Привязка сотрудника к проекту",
-				description: "Ошибка привязки сотрудника к проекту. Попробуйте позже",
+				title: "Привязка сотрудника к задаче",
+				description: "Ошибка привязки сотрудника к задаче. Попробуйте позже",
 			});
 			return;
 		}
 
-		updateProject();
+		updateTask();
+        updateProject();
 		toast({
-			title: "Привязка сотрудника к проекту",
-			description: "Сотрудник успешно привязан к проекту",
+			title: "Привязка сотрудника к задаче",
+			description: "Сотрудник успешно привязан к задаче",
 		});
 	};
 
@@ -59,7 +61,7 @@ export const ProjectMembers = () => {
 		<section className={clsx("std-container")}>
 			<div>
 				<h1 className={clsx("std-h1")}>Участники</h1>
-				<p>Список участников проекта {project?.name}</p>
+				<p>Список участников задачи {task?.name}</p>
 			</div>
 
 			<div className={clsx("std-container__content")}>
@@ -71,7 +73,7 @@ export const ProjectMembers = () => {
 					</DialogTrigger>
 					<DialogContent>
 						<DialogHeader>
-							<DialogTitle>Добавление участника в проект</DialogTitle>
+							<DialogTitle>Добавление участника в задачу</DialogTitle>
 							<DialogDescription>
 								Выбор ведется только из сотрудников вашей организации
 							</DialogDescription>
@@ -88,7 +90,7 @@ export const ProjectMembers = () => {
 									{organization?.members
 										?.filter(
 											(member) =>
-												!project?.members.find(
+												!task?.members.find(
 													(m) => m.user.id === member.user.id
 												)
 										)
@@ -117,7 +119,7 @@ export const ProjectMembers = () => {
 				</Dialog>
 
 				<div className={clsx("std-container")}>
-					{project?.members?.map((member) => {
+					{task?.members?.map((member) => {
 						return <UserMemberCard member={member} key={member.id} />;
 					})}
 				</div>

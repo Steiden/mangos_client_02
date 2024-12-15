@@ -57,7 +57,7 @@ export const Header = () => {
 			{user ? (
 				<Popover>
 					<PopoverTrigger className="">
-						<UserBadge user={user} direction="right" size="small" />
+						<UserBadge user={user} direction="right" size="small" isHover />
 					</PopoverTrigger>
 					<PopoverContent className="flex flex-col gap-1 bg-white p-1 border-2 rounded-xl w-[auto]">
 						<Button variant="ghost" className="justify-start p-3 h-7" onClick={() => router.push("/profile")}>

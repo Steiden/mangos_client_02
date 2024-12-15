@@ -13,17 +13,21 @@ export const renderField = (
 	return (
 		<>
 			{field.type === "date" ? (
-				<DatePicker {...field} onChange={(e) => onChange(e)} />
+				<DatePicker onChange={(e) => onChange(e)} value={field.value} {...field} />
 			) : field.type === "combobox" ? (
 				<MangosSelect
 					items={additionalData[field.data_name]?.map((item: any) => ({
 						label: item.name,
 						value: item.id.toString(),
 					})) || []}
+					selectedItem={{
+						label: field.value?.name,
+						value: field.value?.id,
+					}}
 					onChange={(value) => onChange(+value)}
 				/>
 			) : (
-				<Input {...field} placeholder="" onChange={(e) => onChange(e.target.value)} />
+				<Input value={field.value} onChange={(e) => onChange(e.target.value)} {...field} placeholder="" />
 			)}
 		</>
 	);

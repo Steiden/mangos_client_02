@@ -1,13 +1,3 @@
-// enum InputTypes {
-// 	TEXT = "text",
-// 	COMBOBOX = "combobox",
-// 	CHECKBOX = "checkbox",
-//     NUMBER = "number",
-//     DATE = "date",
-//     FILE = "file",
-//     TEXTAREA = "textarea",
-// }
-
 export type FormField =
 	| {
 			type: "combobox";
@@ -15,10 +5,12 @@ export type FormField =
 			name: string;
 			placeholder: string;
 			data_name: string;
+			value?: any;
 	  }
 	| {
 			type: "text" | "date" | "tel" | "password" | "email";
 			id: string;
 			name: string;
 			placeholder: string;
+			value?: any;
 	  };

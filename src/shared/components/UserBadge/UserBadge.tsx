@@ -11,6 +11,7 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
 	user: User | UserShort | UserFillable;
 	direction?: "left" | "right";
 	size?: "small" | "medium" | "large";
+	isHover?: boolean;
 };
 
 export const UserBadge = ({
@@ -18,13 +19,14 @@ export const UserBadge = ({
 	user,
 	direction = "left",
 	size = "small",
+	isHover = false,
 	className,
 	...rest
 }: Props) => {
 	return (
 		<div
 			className={clsx(
-				"px-3 py-0.5 rounded-md transition-colors hover:bg-accent hover:text-accent-foreground",
+				isHover && "px-3 py-0.5 rounded-md transition-colors hover:bg-accent hover:text-accent-foreground",
 				styles["user-badge"],
 				styles[`user-badge--${direction}`],
 				styles[`user-badge--${size}`],
