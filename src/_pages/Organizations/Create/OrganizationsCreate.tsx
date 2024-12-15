@@ -32,6 +32,12 @@ const fields: FormField[] = [
 		placeholder: "Название организации",
 	},
 	{
+		type: "textarea",
+        id: "description",
+        name: "description",
+        placeholder: "Описание организации",
+	},
+	{
 		type: "text",
 		id: "address",
 		name: "address",
@@ -60,6 +66,7 @@ export const OrganizationsCreate = () => {
 	const [token] = useLocalStorage("token", "");
 
 	const [data, setData] = useState<OrganizationFillable>({
+		description: "",
 		full_name: "",
 		name: "",
 		address: "",

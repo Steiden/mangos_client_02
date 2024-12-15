@@ -13,7 +13,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avat
 import { OrganizationEmployee } from "@/entities/Organization/OrganizationEmployee";
 import { TaskMember } from "@/entities/Task";
 import { useTaskContext } from "@/shared/context/context";
-import { remove } from "@/entities/Task/TaskMember/api";
+import { remove as removeTaskMember } from "@/entities/Task/TaskMember/api";
+import { remove as removeProjectMember } from "@/entities/Project/ProjectMember/api";
+import { remove as removeOrganizationMember } from "@/entities/Organization/OrganizationEmployee/api";
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
 	member: ProjectMember | OrganizationEmployee | TaskMember;
@@ -35,8 +37,8 @@ export const UserMemberCard = ({
 	const { user } = useUserContext();
 	const [token] = useLocalStorage("token", "");
 
-	const handleDelete = async () => {
-		const response = await remove(member.id, token);
+	const handleDeleteFromProject = async () => {
+		const response = await removeProjectMember(member.id, token);
 		if (!response.success) {
 			toast({
 				variant: "destructive",
@@ -46,12 +48,50 @@ export const UserMemberCard = ({
 			return;
 		}
 
-		updateTask();
 		updateProject();
 		updateOrganization();
 		toast({
 			title: "Удаление сотрудника из проекта",
 			description: "Сотрудник удален из проекта",
+		});
+	};
+
+	const handleDeleteFromTask = async () => {
+		const response = await removeTaskMember(member.id, token);
+		if (!response.success) {
+			toast({
+				variant: "destructive",
+				title: "Удаление сотрудника из задачи",
+				description: "Не удалось удалить сотрудника из задачи. Попробуйте позже",
+			});
+			return;
+		}
+
+		updateTask();
+		updateProject();
+		updateOrganization();
+		toast({
+			title: "Удаление сотрудника из задачи",
+			description: "Сотрудник удален из задачи",
+		});
+	};
+
+	const handleDeleteFromOrganization = async () => {
+		const response = await removeOrganizationMember(member.id, token);
+		if (!response.success) {
+			toast({
+				variant: "destructive",
+				title: "Удаление сотрудника из организации",
+				description: "Не удалось удалить сотрудника из организации. Попробуйте позже",
+			});
+			return;
+		}
+
+		updateProject();
+		updateOrganization();
+		toast({
+			title: "Удаление сотрудника из организации",
+			description: "Сотрудник удален из организации",
 		});
 	};
 
@@ -96,7 +136,13 @@ export const UserMemberCard = ({
 								<Button
 									variant="ghost"
 									className="justify-start h-[30px]"
-									onClick={handleDelete}
+									onClick={
+										"organization" in member
+											? handleDeleteFromOrganization
+											: "task" in member
+											? handleDeleteFromTask
+											: handleDeleteFromProject
+									}
 								>
 									<Trash2Icon />
 									Удалить

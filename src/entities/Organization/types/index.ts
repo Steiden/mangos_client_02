@@ -6,6 +6,7 @@ import { OrganizationEmployee } from "../OrganizationEmployee";
 
 export type Organization = {
     id: number;
+    description: string;
     full_name: string;
     name: string;
     address: string;
@@ -22,6 +23,7 @@ export type Organization = {
 
 export type OrganizationShort = {
     id: number;
+    description: string;
     full_name: string;
     name: string;
     address: string;
@@ -33,6 +35,7 @@ export type OrganizationShort = {
 }
 
 export type OrganizationFillable = {
+    description?: string;
     full_name?: string;
     name?: string;
     address?: string;

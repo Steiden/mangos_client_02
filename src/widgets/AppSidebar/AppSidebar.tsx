@@ -28,11 +28,6 @@ const commonItems = [
 		url: "/tasks",
 		icon: ClipboardList,
 	},
-	{
-		title: "Настройки",
-		url: "/settings",
-		icon: Settings,
-	},
 ];
 
 const myItems = [

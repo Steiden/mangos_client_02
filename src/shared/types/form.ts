@@ -8,7 +8,7 @@ export type FormField =
 			value?: any;
 	  }
 	| {
-			type: "text" | "date" | "tel" | "password" | "email";
+			type: "text" | "date" | "tel" | "password" | "email" | "textarea";
 			id: string;
 			name: string;
 			placeholder: string;
