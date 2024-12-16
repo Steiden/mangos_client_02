@@ -1,9 +1,11 @@
+import { PostShort } from "../../Post";
 import { OrganizationShort } from "../../types";
 
 export type Division = {
     id: number;
     name: string;
     organization: OrganizationShort;
+    posts: PostShort[];
     created_at: Date;
     updated_at: Date;
 }

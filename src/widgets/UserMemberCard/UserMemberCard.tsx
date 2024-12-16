@@ -5,17 +5,26 @@ import styles from "./UserMemberCard.module.scss";
 import clsx from "clsx";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/components/ui/popover";
 import { EllipsisVerticalIcon, Trash2Icon, UserPenIcon } from "lucide-react";
-import { Button } from "@/shared/components/ui/button";
+import { Button, buttonVariants } from "@/shared/components/ui/button";
 import { useLocalStorage } from "usehooks-ts";
 import { useToast } from "@/shared/hooks/use-toast";
 import { useOrganizationContext, useProjectContext, useUserContext } from "@/shared/context";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar";
-import { OrganizationEmployee } from "@/entities/Organization/OrganizationEmployee";
+import { OrganizationEmployee, OrganizationEmployeeFillable } from "@/entities/Organization/OrganizationEmployee";
 import { TaskMember } from "@/entities/Task";
 import { useTaskContext } from "@/shared/context/context";
 import { remove as removeTaskMember } from "@/entities/Task/TaskMember/api";
 import { remove as removeProjectMember } from "@/entities/Project/ProjectMember/api";
-import { remove as removeOrganizationMember } from "@/entities/Organization/OrganizationEmployee/api";
+import { remove as removeOrganizationMember, update } from "@/entities/Organization/OrganizationEmployee/api";
+import {
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/shared/components/ui/dialog";
+import { MangosSelect } from "@/shared/components/ui/MangosSelect";
+import { useState } from "react";
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
 	member: ProjectMember | OrganizationEmployee | TaskMember;
@@ -33,9 +42,11 @@ export const UserMemberCard = ({
 	const { toast } = useToast();
 	const { updateTask } = useTaskContext();
 	const { project, updateProject } = useProjectContext();
-	const { updateOrganization } = useOrganizationContext();
+	const { organization, updateOrganization } = useOrganizationContext();
 	const { user } = useUserContext();
 	const [token] = useLocalStorage("token", "");
+
+	const [newPostId, setNewPostId] = useState(0);
 
 	const handleDeleteFromProject = async () => {
 		const response = await removeProjectMember(member.id, token);
@@ -95,6 +106,30 @@ export const UserMemberCard = ({
 		});
 	};
 
+	const handleEditMember = async (e: React.FormEvent, member: OrganizationEmployee) => {
+		e.preventDefault();
+
+		const data: OrganizationEmployeeFillable = {
+			...member,
+			post_id: newPostId,
+		}
+
+		const response = await update(member.id, data, token);
+		if (!response.success) {
+			toast({
+				variant: "destructive",
+				title: "Редактирование сотрудника",
+				description: "Не удалось редактировать сотрудника. Попробуйте позже",
+			});
+			return;
+		}
+		updateOrganization();
+		toast({
+            title: "Редактирование сотрудника",
+            description: "Информация о сотруднике успешно изменена",
+        });
+	}
+
 	return (
 		<div className={clsx(styles["card"], styles[`card--${size}`], className)} {...rest}>
 			<div className={clsx(styles["card__content"])}>
@@ -124,14 +159,42 @@ export const UserMemberCard = ({
 							</PopoverTrigger>
 							<PopoverContent className="flex flex-col gap-1 bg-white p-1 border-2 rounded-xl w-[auto]">
 								{user?.id === project?.user.id && "organization" in member && (
-									<Button
-										variant="ghost"
-										className="justify-start h-[30px]"
-										onClick={() => {}}
-									>
-										<UserPenIcon />
-										Редактировать
-									</Button>
+									<Dialog>
+										<DialogTrigger
+											className={clsx(
+												buttonVariants({ variant: "ghost" }),
+												"justify-start h-[30px]"
+											)}
+										>
+											<UserPenIcon />
+											Редактировать
+										</DialogTrigger>
+										<DialogContent>
+											<DialogHeader>
+												<DialogTitle>Редактарование сотрудника</DialogTitle>
+											</DialogHeader>
+											<form className="flex flex-col gap-2" onSubmit={(e) => handleEditMember(e, member)}>
+												<MangosSelect
+													placeholder="Выберите должность"
+													items={
+														organization?.posts.map((post) => ({
+															label: post.name,
+															value: post.id.toString(),
+														})) || []
+													}
+													selectedItem={{
+														label: (member as OrganizationEmployee).post
+															?.name,
+														value: (
+															member as OrganizationEmployee
+														).post?.id?.toString(),
+													}}
+													onChange={(value) => setNewPostId(+value)}
+												/>
+												<Button variant="outline" type="submit" className="std-button w-fit self-center">Редактировать</Button>
+											</form>
+										</DialogContent>
+									</Dialog>
 								)}
 								<Button
 									variant="ghost"

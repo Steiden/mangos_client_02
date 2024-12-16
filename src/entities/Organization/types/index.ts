@@ -3,6 +3,8 @@ import { ActivityType } from "../ActivityType/types";
 import { ProjectShort } from "@/entities/Project";
 import { CategoryShort, TagShort } from "@/entities/Task";
 import { OrganizationEmployee } from "../OrganizationEmployee";
+import { Division } from "../Division";
+import { PostShort } from "../Post";
 
 export type Organization = {
     id: number;
@@ -17,6 +19,8 @@ export type Organization = {
     projects: ProjectShort[];
     categories: CategoryShort[];
     tags: TagShort[];
+    divisions: Division[];
+    posts: PostShort[];
     created_at: Date;
     updated_at: Date;
 }

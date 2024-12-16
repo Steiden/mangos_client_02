@@ -42,11 +42,11 @@ export async function create(data: OrganizationEmployeeFillable, token: string):
 	}
 }
 
-export async function update(id: number, name: string, token: string): Promise<MangosResponse<OrganizationEmployee>> {
+export async function update(id: number, data: OrganizationEmployeeFillable, token: string): Promise<MangosResponse<OrganizationEmployee>> {
 	try {
 		const response: AxiosResponse<MangosResponse<OrganizationEmployee>> = await api.put(
 			`${endpoints.organization_employees}/${id}`,
-			{ name },
+			data,
 			getAxiosConfig(token)
 		);
 		return response.data;

@@ -60,59 +60,6 @@ export const OrganizationMembers = () => {
 			</div>
 
 			<div className={clsx("std-container__content")}>
-				<Dialog>
-					<DialogTrigger
-						className={clsx(buttonVariants({ variant: "outline" }), "self-end")}
-					>
-						Добавить участника
-					</DialogTrigger>
-					<DialogContent>
-						<DialogHeader>
-							<DialogTitle>Добавление участника в организацию</DialogTitle>
-							<DialogDescription>
-								Выбор ведется только из сотрудников вашей организации
-							</DialogDescription>
-						</DialogHeader>
-						<Command
-							filter={(value, search) => {
-								return value.includes(search) ? 1 : 0;
-							}}
-						>
-							<CommandInput placeholder="Поиск сотрудника..." />
-							<CommandList>
-								<CommandGroup className="py-2">
-									<CommandEmpty>Свободных сотрудников нет.</CommandEmpty>
-									{organization?.members
-										?.filter(
-											(member) =>
-												!organization?.members.find(
-													(m) => m.user.id === member.user.id
-												)
-										)
-										.map((member) => {
-											return (
-												<CommandItem
-													style={{ background: "none", padding: "0" }}
-													key={member.id}
-												>
-													<UserMemberCard
-														member={member}
-														isActions={false}
-														size="small"
-														className="cursor-pointer"
-														onClick={() =>
-															handleLinkToProject(member.user.id)
-														}
-													/>
-												</CommandItem>
-											);
-										})}
-								</CommandGroup>
-							</CommandList>
-						</Command>
-					</DialogContent>
-				</Dialog>
-
 				<div className={clsx("std-container")}>
 					{organization?.members?.map((member) => {
 						return <UserMemberCard member={member} key={member.id} />;
