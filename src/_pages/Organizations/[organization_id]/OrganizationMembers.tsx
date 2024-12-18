@@ -56,7 +56,7 @@ export const OrganizationMembers = () => {
 		<section className={clsx("std-container")}>
 			<div>
 				<h1 className={clsx("std-h1")}>Участники</h1>
-				<p>Список участников задачи {organization?.name}</p>
+				<p>Список сотрудников организации {organization?.name}</p>
 			</div>
 
 			<div className={clsx("std-container__content")}>

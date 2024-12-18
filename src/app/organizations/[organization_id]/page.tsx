@@ -1,4 +1,4 @@
-import { Organization } from "@/_pages/Organizations/[organization_id]/Organization";
+import { Organization } from "@pages/Organizations/[organization_id]/Organization";
 
 export default function OrganizationsMyPage() {
 	return <Organization />;
