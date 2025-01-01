@@ -1,4 +1,4 @@
-import { Home } from "@pages/Home/Home";
+import { Home } from "@pages/Home/Home.tsx";
 
 export default function HomePage() {
   return (

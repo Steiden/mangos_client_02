@@ -1,19 +1,18 @@
 "use client";
 
+import React from "react";
+import clsx from "clsx";
 import {
 	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
 	CardHeader,
-	CardTitle,
+	CardContent,
+	CardFooter,
+	CardDescription,
 } from "@/shared/components/ui/card";
-import styles from "./TaskCard.module.scss";
+import styles from "./TaskCard.module.css";
 import { get, remove } from "@/entities/Task";
-import clsx from "clsx";
-import { UserBadge } from "@/shared/components/UserBadge/UserBadge";
 import { Popover, PopoverTrigger } from "@/shared/components/ui/popover";
-import { EditIcon, EllipsisVerticalIcon, EyeIcon, Trash2Icon } from "lucide-react";
+import { EllipsisVerticalIcon, EyeIcon, Trash2Icon } from "lucide-react";
 import { PopoverContent } from "@radix-ui/react-popover";
 import { Button } from "@/shared/components/ui/button";
 import { useRouter } from "next/navigation";
@@ -22,21 +21,25 @@ import { useToast } from "@/shared/hooks/use-toast";
 import { useProjectContext } from "@/shared/context";
 import { TaskMiddle } from "@/entities/Task/types";
 import { useTaskContext } from "@/shared/context/context";
+import { UserBadge } from "@/shared/components/UserBadge/UserBadge";
 
 type Props = {
 	task: TaskMiddle;
 };
 
-export const TaskCard = ({ task }: Props) => {
+const formatDate = (dateString: Date | string) => new Date(dateString).toLocaleDateString();
+
+const TaskCard = ({ task }: Props) => {
 	const router = useRouter();
 	const { toast } = useToast();
 	const { setTask } = useTaskContext();
 	const { updateProject } = useProjectContext();
 	const [token] = useLocalStorage("token", "");
-	
+	const { created_at, finished_at, execution_status, task_priority, updated_at, user } = task;
+
 	const handleShow = async () => {
 		const response = await get(task.id, token);
-		if(!response.success) return;
+		if (!response.success) return;
 		setTask(response.data);
 
 		router.push(`/tasks/${task.id}`);
@@ -66,11 +69,7 @@ export const TaskCard = ({ task }: Props) => {
 					<EllipsisVerticalIcon />
 				</PopoverTrigger>
 				<PopoverContent className="flex flex-col gap-1 bg-white p-1 border-2 rounded-xl">
-					<Button
-						variant="ghost"
-						className="justify-start h-[30px]"
-						onClick={handleShow}
-					>
+					<Button variant="ghost" className="justify-start h-[30px]" onClick={handleShow}>
 						<EyeIcon />
 						Посмотреть
 					</Button>
@@ -86,38 +85,37 @@ export const TaskCard = ({ task }: Props) => {
 			</Popover>
 
 			<CardHeader className="task-card__header">
-				<CardTitle>{task.name}</CardTitle>
-				<CardDescription>{new Date(task.created_at).toLocaleDateString()}</CardDescription>
+				<CardDescription>{formatDate(created_at)}</CardDescription>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-2">
 				<p className={clsx(styles["task-card__text"])}>
 					Срок:{" "}
 					<span className={clsx(styles["task-card__span"])}>
-						{new Date(task.finished_at).toLocaleDateString()}
+						{formatDate(finished_at)}
 					</span>
 				</p>
 				<p className={clsx(styles["task-card__text"])}>
 					Статус:{" "}
 					<span className={clsx(styles["task-card__span"])}>
-						{task.execution_status.caption}
+						{execution_status.caption}
 					</span>
 				</p>
 				<p className={clsx(styles["task-card__text"])}>
 					Приоритет:{" "}
-					<span className={clsx(styles["task-card__span"])}>
-						{task.task_priority.name}
-					</span>
+					<span className={clsx(styles["task-card__span"])}>{task_priority.name}</span>
 				</p>
 			</CardContent>
 			<CardFooter className="flex flex-col gap-2 items-start">
 				<p className={clsx(styles["task-card__text"])}>
 					Обновлено:{" "}
 					<span className={clsx(styles["task-card__span"])}>
-						{new Date(task.updated_at).toLocaleDateString()}
+						{formatDate(updated_at)}
 					</span>
 				</p>
-				<UserBadge type="name" user={task.user} />
+				<UserBadge type="name" user={user} />
 			</CardFooter>
 		</Card>
 	);
 };
+
+export default TaskCard;
