@@ -9,7 +9,7 @@ import {
 	CardFooter,
 	CardDescription,
 } from "@/shared/components/ui/card";
-import styles from "./TaskCard.module.css";
+import styles from "./TaskCard.module.scss";
 import { get, remove } from "@/entities/Task";
 import { Popover, PopoverTrigger } from "@/shared/components/ui/popover";
 import { EllipsisVerticalIcon, EyeIcon, Trash2Icon } from "lucide-react";
@@ -29,7 +29,7 @@ type Props = {
 
 const formatDate = (dateString: Date | string) => new Date(dateString).toLocaleDateString();
 
-const TaskCard = ({ task }: Props) => {
+export const TaskCard = ({ task }: Props) => {
 	const router = useRouter();
 	const { toast } = useToast();
 	const { setTask } = useTaskContext();
@@ -117,5 +117,3 @@ const TaskCard = ({ task }: Props) => {
 		</Card>
 	);
 };
-
-export default TaskCard;

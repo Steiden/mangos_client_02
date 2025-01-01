@@ -15,7 +15,7 @@ import { Project } from "@/entities/Project";
 import { User } from "@/entities/User";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-const Header = () => {
+export const Header = () => {
 	const router = useRouter();
 	const [, setToken] = useLocalStorage("token", "");
 	const { user, setUser } = useUserContext();
@@ -109,5 +109,3 @@ const UserSection: React.FC<UserSectionProps> = ({ user, router, logout }) =>
 			</Button>
 		</div>
 	);
-
-export default Header;
