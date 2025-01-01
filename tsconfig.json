@@ -1,8 +1,7 @@
 {
 	"compilerOptions": {
-		"allowImportingTsExtensions": true,
-		"target": "ES2017",
 		"lib": ["dom", "dom.iterable", "esnext"],
+		"target": "ES2017",
 		"allowJs": true,
 		"skipLibCheck": true,
 		"strict": true,
@@ -30,6 +29,6 @@
 			"@styles/*": ["./src/shared/styles/*"]
 		}
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.mjs"],
 	"exclude": ["node_modules"]
 }
