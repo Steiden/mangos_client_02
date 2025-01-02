@@ -29,5 +29,5 @@ export const Mangos = () => {
 		updateOrganization();
 	}, [user]);
 
-	return <div></div>;
+	return <div id="mangos"></div>;
 };
