@@ -1,8 +1,5 @@
-// import { Home } from "@pages/Home/Home.tsx";
-import { Home } from "../_pages/Home/Home";
+import { Home } from "@/views/Home/Home";
 
 export default function HomePage() {
-  return (
-    <Home />
-  );
+	return <Home />;
 }

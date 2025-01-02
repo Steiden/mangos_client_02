@@ -1,4 +1,4 @@
-import { Project } from "@pages/Projects/[project_id]/Project";
+import { Project } from "@/views/Projects/[project_id]/Project";
 
 export function generateStaticParams() {
 	return [{ id: "test" }];

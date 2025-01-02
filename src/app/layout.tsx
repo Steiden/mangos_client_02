@@ -7,7 +7,7 @@ import { Toaster } from "@/shared/components/ui/toaster";
 import { Header } from "@/widgets/Header/Header";
 import { SidebarProvider } from "@/shared/components/ui/sidebar";
 import { AppSidebar } from "@/widgets/AppSidebar/AppSidebar";
-import { Mangos } from "./Mangos";
+import { Mangos } from "@/app/Mangos";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
