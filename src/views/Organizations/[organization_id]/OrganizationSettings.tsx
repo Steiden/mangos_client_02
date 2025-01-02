@@ -54,35 +54,35 @@ export const OrganizationSettings = () => {
 			id: "name",
 			name: "name",
 			placeholder: "Название задачи",
-			value: data.name,
+			value: data.name || "",
 		},
 		{
 			type: "text",
 			id: "full_name",
 			name: "full_name",
 			placeholder: "Полное название организации",
-			value: data.full_name,
+			value: data.full_name || "",
 		},
 		{
 			type: "textarea",
 			id: "description",
 			name: "description",
 			placeholder: "Описание организации",
-			value: data.description,
+			value: data.description || "",
 		},
 		{
 			type: "text",
 			id: "address",
 			name: "address",
 			placeholder: "Адрес организации",
-			value: data.address,
+			value: data.address || "",
 		},
 		{
 			type: "tel",
 			id: "phone",
 			name: "phone",
 			placeholder: "Телефон организации",
-			value: data.phone,
+			value: data.phone || "",
 		},
 		{
 			type: "combobox",
@@ -240,7 +240,8 @@ export const OrganizationSettings = () => {
 						<Popover>
 							<PopoverTrigger className="flex items-center gap-1 text-sm">
 								<Badge>
-									<PlusIcon width={15} height={15} />Добавить
+									<PlusIcon width={15} height={15} />
+									Добавить
 								</Badge>
 							</PopoverTrigger>
 							<PopoverContent className="flex flex-col gap-2">
@@ -267,7 +268,8 @@ export const OrganizationSettings = () => {
 						<Popover>
 							<PopoverTrigger className="flex items-center gap-1 text-sm">
 								<Badge>
-									<PlusIcon width={15} height={15} />Добавить
+									<PlusIcon width={15} height={15} />
+									Добавить
 								</Badge>
 							</PopoverTrigger>
 							<PopoverContent className="flex flex-col gap-2">
