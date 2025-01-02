@@ -12,7 +12,6 @@ import {
 	DialogTrigger,
 } from "@/shared/components/ui/dialog";
 import { Input } from "@/shared/components/ui/input";
-import { Label } from "@/shared/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/components/ui/popover";
 import { useOrganizationContext, useUserContext } from "@/shared/context";
 import { useToast } from "@/shared/hooks/use-toast";

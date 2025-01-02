@@ -10,7 +10,7 @@ import { useLocalStorage } from "usehooks-ts";
 import { useToast } from "@/shared/hooks/use-toast";
 import { useOrganizationContext, useUserContext } from "@/shared/context";
 import { useRouter } from "next/navigation";
-import { create as createProject, ProjectFillable, update } from "@/entities/Project";
+import { create as createProject, ProjectFillable } from "@/entities/Project";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { create, ProjectMemberFillable } from "@/entities/Project/ProjectMember";
 import { ExecutionStatuses } from "@/shared/api/constants";

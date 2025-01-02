@@ -1,5 +1,9 @@
 import { Task } from "@pages/Tasks/[task_id]/Task";
 
-export default function TaskPage() {
+export function generateStaticParams() {
+	return [{ id: "test" }];
+}
+
+export default function TaskPage(props: any) {
     return <Task />
 }

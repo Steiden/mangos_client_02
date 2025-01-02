@@ -20,7 +20,7 @@ export const Header = () => {
 	const [, setToken] = useLocalStorage("token", "");
 	const { user, setUser } = useUserContext();
 	const { project, setProject } = useProjectContext();
-	const { organization, setOrganization } = useOrganizationContext();
+	const { setOrganization } = useOrganizationContext();
 
 	const logout = () => {
 		setUser(null);

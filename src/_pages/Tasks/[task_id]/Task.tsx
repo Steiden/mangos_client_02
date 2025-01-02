@@ -4,15 +4,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui
 import styles from "./Task.module.scss";
 import clsx from "clsx";
 import { BadgeInfoIcon, SettingsIcon, UserIcon } from "lucide-react";
-import { useProjectContext } from "@/shared/context";
 import { TaskInfo } from "./TaskInfo";
 import { TaskMembers } from "./TaskMembers";
 import { TaskSettings } from "./TaskSettings";
 
 
 export const Task = () => {
-	const { project } = useProjectContext();
-
 	return (
 		<Tabs orientation="vertical" defaultValue="about" className={clsx(styles["task"])}>
 			<TabsList className={clsx(styles["task__tabs"])}>

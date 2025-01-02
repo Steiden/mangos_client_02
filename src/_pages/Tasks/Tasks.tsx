@@ -4,15 +4,12 @@ import { Button } from "@/shared/components/ui/button";
 import styles from "./Tasks.module.scss";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
-import { useLocalStorage } from "usehooks-ts";
-import { useToast } from "@/shared/hooks/use-toast";
 import { TaskCard } from "@/widgets/TaskCard/TaskCard";
 import { useProjectContext } from "@/shared/context";
 
 export const Tasks = () => {
 	const router = useRouter();
     const { project } = useProjectContext();
-	const { toast } = useToast();
 
 
 	return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { Building, ClipboardList, PanelsTopLeft, Settings } from "lucide-react";
+import { Building, ClipboardList, PanelsTopLeft } from "lucide-react";
 import {
 	Sidebar,
 	SidebarContent,
@@ -15,7 +15,6 @@ import {
 import { Combobox, ComboBoxItem } from "@/shared/components/ui/combobox";
 import Link from "next/link";
 import { useOrganizationContext, useProjectContext, useUserContext } from "@/shared/context";
-import { requestFormReset } from "react-dom";
 
 const commonItems = [
 	{

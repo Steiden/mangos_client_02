@@ -27,7 +27,7 @@ export const MangosContext = createContext<{
 } | null>(null);
 
 export function MangosContextProvider({ children }: { children: ReactNode }) {
-	const [localUser, setLocalUser] = useLocalStorage<User | null>("user", null);
+	const [,setLocalUser] = useLocalStorage<User | null>("user", null);
 	const [localOrganization, setLocalOrganization] = useLocalStorage<Organization | null>(
 		"organization",
 		null

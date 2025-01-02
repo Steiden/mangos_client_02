@@ -37,7 +37,7 @@ export const Login = () => {
 	const router = useRouter();
 
 	const { setUser } = useUserContext();
-	const [token, setToken] = useLocalStorage("token", "");
+	const [,setToken] = useLocalStorage("token", "");
 	const [data, setData] = useState<AuthorizationData>({
 		login: "",
 		password: "",

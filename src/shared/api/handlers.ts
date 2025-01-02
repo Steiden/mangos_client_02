@@ -1,4 +1,4 @@
-import { MangosErrorResponse, MangosResponse } from "./types";
+import { MangosErrorResponse } from "./types";
 
 export function handleResponseException(error: unknown, message: string = ""): MangosErrorResponse {
 	return {

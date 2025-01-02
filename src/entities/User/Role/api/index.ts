@@ -3,7 +3,7 @@ import { endpoints } from "@/shared/api/endpoints";
 import { AxiosResponse } from "axios";
 import { Role, RoleFillable } from "../types";
 import { handleResponseException } from "@/shared/api/handlers";
-import { ExecException } from "child_process";
+
 
 export async function getList(token: string): Promise<MangosResponse<Role[]>> {
 	try {
