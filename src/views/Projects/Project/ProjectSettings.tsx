@@ -4,7 +4,6 @@ import { getList as getExecutionStatuses } from "@/entities/execution_status";
 import { ProjectFillable, update } from "@/entities/project";
 import { renderField } from "@/features/renderField";
 import { Button } from "@/shared/components/ui/button";
-import { Label } from "@/shared/components/ui/label";
 import { useOrganizationContext, useProjectContext } from "@/shared/context";
 import { useToast } from "@/shared/hooks/use-toast";
 import { FormField } from "@/shared/types/form";
@@ -51,8 +50,12 @@ export const ProjectSettings = () => {
 			placeholder: "Статус выполнения",
 			data_name: "executionStatuses",
 			value: {
-				id: showData.executionStatuses.find((item) => item.id === data.execution_status_id)?.id || 0,
-				name: showData.executionStatuses.find((item) => item.id === data.execution_status_id)?.name || "",
+				id:
+					showData.executionStatuses.find((item) => item.id === data.execution_status_id)
+						?.id || 0,
+				name:
+					showData.executionStatuses.find((item) => item.id === data.execution_status_id)
+						?.name || "",
 			},
 		},
 	];
@@ -120,16 +123,14 @@ export const ProjectSettings = () => {
 			</div>
 
 			<form className={clsx("std-container__content")} onSubmit={handleSubmit}>
-				{fields.map((field) => (
-					<div className="grid w-full max-w-sm items-center gap-1.5" key={field.id}>
-						<Label htmlFor={field.name}>{field.placeholder}</Label>
-						{renderField(
-							field,
-							(value) => setData({ ...data, [field.name]: value }),
-							showData
-						)}
-					</div>
-				))}
+				{fields.map((field) =>
+					renderField(
+						field,
+						(value) => setData({ ...data, [field.name]: value }),
+						showData,
+						true
+					)
+				)}
 				<Button variant="outline" type="submit" className={clsx("std-button")}>
 					Сохранить
 				</Button>

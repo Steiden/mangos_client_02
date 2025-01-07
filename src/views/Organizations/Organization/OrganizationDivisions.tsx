@@ -111,7 +111,7 @@ export const OrganizationDivisions = () => {
 				</Dialog>
 
 				<div className="flex flex-col gap-3 w-full">
-					{organization?.divisions.map((division) => (
+					{organization?.divisions?.map((division) => (
 						<div
 							key={division.id}
 							className="border border-input rounded-md shadow-sm w-full px-5 py-3"

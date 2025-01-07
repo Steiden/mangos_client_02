@@ -149,7 +149,7 @@ export const OrganizationSettings = () => {
 		const tagConverted: TagShort = {
 			id: response.data.id,
 			name: response.data.name,
-			organization_id: organization?.id || organization?.id || 0,
+			organization_id: organization?.id || 0,
 			created_at: response.data.created_at,
 			updated_at: response.data.updated_at,
 		};
@@ -178,7 +178,7 @@ export const OrganizationSettings = () => {
 		const categoryConverted: CategoryShort = {
 			id: response.data.id,
 			name: response.data.name,
-			organization_id: organization?.id || organization?.id || 0,
+			organization_id: organization?.id || 0,
 			created_at: response.data.created_at,
 			updated_at: response.data.updated_at,
 		};
@@ -218,16 +218,14 @@ export const OrganizationSettings = () => {
 			</div>
 
 			<form className={clsx("std-container__content")} onSubmit={handleSubmit}>
-				{fields.map((field) => (
-					<div className="grid w-full max-w-sm items-center gap-1.5" key={field.id}>
-						<Label htmlFor={field.name}>{field.placeholder}</Label>
-						{renderField(
-							field,
-							(value) => setData({ ...data, [field.name]: value }),
-							showData
-						)}
-					</div>
-				))}
+				{fields.map((field) =>
+					renderField(
+						field,
+						(value) => setData({ ...data, [field.name]: value }),
+						showData,
+						true
+					)
+				)}
 
 				<div className="grid w-full max-w-sm items-center gap-1.5">
 					<Label htmlFor="tags">Теги</Label>

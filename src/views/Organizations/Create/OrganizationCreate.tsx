@@ -3,7 +3,6 @@
 import clsx from "clsx";
 import styles from "./OrganizationCreate.module.scss";
 import { Button } from "@/shared/components/ui/button";
-import { Label } from "@/shared/components/ui/label";
 import { useEffect, useState } from "react";
 import { create as createOrganization, OrganizationFillable } from "@/entities/organization";
 import { useLocalStorage } from "usehooks-ts";
@@ -31,9 +30,9 @@ const fields: FormField[] = [
 	},
 	{
 		type: "textarea",
-        id: "description",
-        name: "description",
-        placeholder: "Описание организации",
+		id: "description",
+		name: "description",
+		placeholder: "Описание организации",
 	},
 	{
 		type: "text",
@@ -77,7 +76,6 @@ export const OrganizationsCreate = () => {
 	}>({
 		activityTypes: [],
 	});
-
 
 	useEffect(() => {
 		async function fetchData() {
@@ -153,16 +151,14 @@ export const OrganizationsCreate = () => {
 				Создание организации
 			</h1>
 			<form className={clsx(styles["organizations-create__form"])} onSubmit={handleSubmit}>
-				{fields.map((field) => (
-					<div className="grid w-full max-w-sm items-center gap-1.5" key={field.id}>
-						<Label htmlFor={field.name}>{field.placeholder}</Label>
-						{renderField(
-							field,
-							(value) => setData({ ...data, [field.name]: value }),
-							showData
-						)}
-					</div>
-				))}
+				{fields.map((field) =>
+					renderField(
+						field,
+						(value) => setData({ ...data, [field.name]: value }),
+						showData,
+						true
+					)
+				)}
 
 				<Button
 					variant="outline"

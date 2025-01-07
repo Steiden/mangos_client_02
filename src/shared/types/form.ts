@@ -1,16 +1,18 @@
-export type FormField =
-	| {
-			type: "combobox";
-			id: string;
-			name: string;
-			placeholder: string;
-			data_name: string;
-			value?: any;
-	  }
-	| {
-			type: "text" | "date" | "tel" | "password" | "email" | "textarea";
-			id: string;
-			name: string;
-			placeholder: string;
-			value?: any;
-	  };
+type Field = {
+	type: "combobox" | "text" | "date" | "tel" | "password" | "email" | "textarea";
+	id: string;
+	name: string;
+	placeholder: string;
+	value?: any;
+};
+
+export type FormField = Field &
+	(
+		| {
+				type: "combobox";
+				data_name: string;
+		  }
+		| {
+				type: "text" | "date" | "tel" | "password" | "email" | "textarea";
+		  }
+	);

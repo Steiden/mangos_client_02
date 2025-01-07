@@ -185,16 +185,14 @@ export const TaskSettings = () => {
 			</div>
 
 			<form className={clsx("std-container__content")} onSubmit={handleSubmit}>
-				{fields.map((field) => (
-					<div className="grid w-full max-w-sm items-center gap-1.5" key={field.id}>
-						<Label htmlFor={field.name}>{field.placeholder}</Label>
-						{renderField(
-							field,
-							(value) => setData({ ...data, [field.name]: value }),
-							showData
-						)}
-					</div>
-				))}
+				{fields.map((field) =>
+					renderField(
+						field,
+						(value) => setData({ ...data, [field.name]: value }),
+						showData,
+						true
+					)
+				)}
 				<Button variant="outline" type="submit" className={clsx("std-button")}>
 					Сохранить
 				</Button>

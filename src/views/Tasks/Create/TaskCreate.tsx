@@ -3,7 +3,6 @@
 import clsx from "clsx";
 import styles from "./TaskCreate.module.scss";
 import { Button } from "@/shared/components/ui/button";
-import { Label } from "@/shared/components/ui/label";
 import { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { useToast } from "@/shared/hooks/use-toast";
@@ -21,47 +20,6 @@ import { FormField } from "@/shared/types/form";
 import { renderField } from "@/features/renderField";
 import { ExecutionStatuses } from "@/shared/api/constants";
 import { getList as getTaskPriorities } from "@/entities/task/task_priority";
-
-const fields: FormField[] = [
-	{
-		type: "text",
-		id: "name",
-		name: "name",
-		placeholder: "Название задачи",
-	},
-	{
-		type: "text",
-		id: "description",
-		name: "description",
-		placeholder: "Описание задачи",
-	},
-	{
-		type: "date",
-		id: "started_at",
-		name: "started_at",
-		placeholder: "Дата начала",
-	},
-	{
-		type: "date",
-		id: "finished_at",
-		name: "finished_at",
-		placeholder: "Дата завершения",
-	},
-	{
-		type: "combobox",
-		id: "task_priority_id",
-		name: "task_priority_id",
-		placeholder: "Приоритет",
-		data_name: "taskPriorities",
-	},
-	{
-		type: "combobox",
-		id: "category_id",
-		name: "category_id",
-		placeholder: "Категория",
-		data_name: "categories",
-	},
-];
 
 export const TasksCreate = () => {
 	const router = useRouter();
@@ -90,9 +48,49 @@ export const TasksCreate = () => {
 		categories: [],
 	});
 
-	
+	const fields: FormField[] = [
+		{
+			type: "text",
+			id: "name",
+			name: "name",
+			placeholder: "Название задачи",
+		},
+		{
+			type: "text",
+			id: "description",
+			name: "description",
+			placeholder: "Описание задачи",
+		},
+		{
+			type: "date",
+			id: "started_at",
+			name: "started_at",
+			placeholder: "Дата начала",
+		},
+		{
+			type: "date",
+			id: "finished_at",
+			name: "finished_at",
+			placeholder: "Дата завершения",
+		},
+		{
+			type: "combobox",
+			id: "task_priority_id",
+			name: "task_priority_id",
+			placeholder: "Приоритет",
+			data_name: "taskPriorities",
+		},
+		{
+			type: "combobox",
+			id: "category_id",
+			name: "category_id",
+			placeholder: "Категория",
+			data_name: "categories",
+		},
+	];
+
 	useEffect(() => {
-		if(organization) setShowData({...showData, categories: organization.categories});
+		if (organization) setShowData({ ...showData, categories: organization.categories });
 	}, [organization]);
 
 	useEffect(() => {
@@ -172,16 +170,14 @@ export const TasksCreate = () => {
 		<section className={clsx("std-center", styles["tasks-create"])}>
 			<h1 className={clsx("std-h1", styles["tasks-create__title"])}>Создание задачи</h1>
 			<form className={clsx(styles["tasks-create__form"])} onSubmit={handleSubmit}>
-				{fields.map((field) => (
-					<div className="grid w-full max-w-sm items-center gap-1.5" key={field.id}>
-						<Label htmlFor={field.name}>{field.placeholder}</Label>
-						{renderField(
-							field,
-							(value) => setData({ ...data, [field.name]: value }),
-							showData
-						)}
-					</div>
-				))}
+				{fields.map((field) =>
+					renderField(
+						field,
+						(value) => setData({ ...data, [field.name]: value }),
+						showData,
+						true
+					)
+				)}
 
 				<Button
 					variant="outline"
