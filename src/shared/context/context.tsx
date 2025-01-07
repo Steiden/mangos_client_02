@@ -16,7 +16,6 @@ import { Organization } from "@/entities/organization/types";
 import { Project } from "@/entities/project/types";
 import { me } from "@/entities/auth/api";
 import { useLocalStorage } from "usehooks-ts";
-import { usePathname, useRouter } from "next/navigation";
 import { get as getOrganization } from "@/entities/organization";
 import { get as getProject } from "@/entities/project";
 import { get as getTask, Task } from "@/entities/task";
@@ -35,10 +34,6 @@ export function MangosContextProvider({ children }: { children: ReactNode }) {
 	const [localProject, setLocalProject] = useLocalStorage<Project | null>("project", null);
 	const [localTask, setLocalTask] = useLocalStorage<Task | null>("task", null);
 
-	const pathname = usePathname();
-	const router = useRouter();
-	const [token] = useLocalStorage("token", "");
-
 	const [data, setData] = useState<MangosContextType>({
 		user: null,
 		organization: null,
@@ -54,34 +49,6 @@ export function MangosContextProvider({ children }: { children: ReactNode }) {
 			task: localTask,
 		}));
 	}, []);
-
-	useEffect(() => {
-		async function getMe() {
-			const meResponse = await me(token);
-			if (!meResponse.success) {
-				setData((prev) => ({
-					...prev,
-					user: null,
-					organization: null,
-					project: null,
-				}));
-
-				setLocalUser(null);
-				setLocalOrganization(null);
-				setLocalProject(null);
-
-				if (pathname !== "/auth/login" && pathname !== "/auth/register" && pathname !== "/")
-					router.push("/auth/login");
-
-				return;
-			}
-			setData((prev) => ({
-				...prev,
-				user: meResponse.data,
-			}));
-		}
-		getMe();
-	}, [token]);
 
 	useEffect(() => {
 		if (data.user) setLocalUser(data.user);

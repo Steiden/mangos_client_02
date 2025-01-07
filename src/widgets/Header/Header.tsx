@@ -4,7 +4,7 @@ import { SidebarTrigger } from "@/shared/components/ui/sidebar";
 import styles from "./Header.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import { useOrganizationContext, useProjectContext, useUserContext } from "@/shared/context";
+import { useProjectContext, useUserContext } from "@/shared/context";
 import { Button } from "@/shared/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/components/ui/popover";
@@ -18,14 +18,10 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 export const Header = () => {
 	const router = useRouter();
 	const [, setToken] = useLocalStorage("token", "");
-	const { user, setUser } = useUserContext();
-	const { project, setProject } = useProjectContext();
-	const { setOrganization } = useOrganizationContext();
+	const { user } = useUserContext();
+	const { project } = useProjectContext();
 
 	const logout = () => {
-		setUser(null);
-		setProject(null);
-		setOrganization(null);
 		setToken("");
 	};
 
@@ -43,7 +39,7 @@ export const Header = () => {
 	);
 };
 
-interface ProjectNavigationProps {
+type ProjectNavigationProps = {
 	project: Project;
 	router: AppRouterInstance;
 }
@@ -64,7 +60,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({ project, router }
 	</div>
 );
 
-interface UserSectionProps {
+type UserSectionProps = {
 	user: User | null;
 	router: AppRouterInstance;
 	logout: () => void;
