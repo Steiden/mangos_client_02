@@ -6,7 +6,6 @@ import { getList as getCategories } from "@/entities/task/category";
 import { TaskFillable, update } from "@/entities/task";
 import { renderField } from "@/features/renderField";
 import { Button } from "@/shared/components/ui/button";
-import { Label } from "@/shared/components/ui/label";
 import { useOrganizationContext, useProjectContext } from "@/shared/context";
 import { useTaskContext } from "@/shared/context/context";
 import { useToast } from "@/shared/hooks/use-toast";
