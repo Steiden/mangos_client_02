@@ -32,7 +32,7 @@ export const Header = () => {
 	return (
 		<header className={styles.header}>
 			<div className={styles.header__left}>
-				<SidebarTrigger />
+				{user && <SidebarTrigger />}
 				<Link href="/">
 					<Image src="/logo_alt.svg" width={30} height={30} alt="logo" />
 				</Link>

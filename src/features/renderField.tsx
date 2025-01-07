@@ -18,7 +18,7 @@ export const renderField = (
 			) : field.type === "textarea" ? (
 				<Textarea
 					onChange={(e) => onChange(e.target.value)}
-					value={field.value || ""}
+					value={field.value}
 					{...field}
 				/>
 			) : field.type === "combobox" ? (

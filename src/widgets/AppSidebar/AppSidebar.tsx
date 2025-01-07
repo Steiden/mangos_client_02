@@ -52,69 +52,73 @@ export function AppSidebar() {
 		: [];
 
 	return (
-		<Sidebar>
-			<SidebarHeader>
-				<SidebarMenu>
-					<SidebarMenuItem>
-						<Combobox
-							items={comboboxItems}
-							placeholder="Выберите организацию..."
-							defaultValue={organization?.name}
-							className="w-[100%]"
-							onChange={(value) => {
-								if (
-									!value ||
-									!user ||
-									value.toString() == organization?.id.toString()
-								)
-									return;
-								const organizationSearched = user.organizations.find(
-									(o) => o.id == +value
-								);
-								if (!organizationSearched) return;
-								setProject(null);
-								setOrganization(organizationSearched);
-							}}
-						/>
-					</SidebarMenuItem>
-				</SidebarMenu>
-			</SidebarHeader>
-			<SidebarContent>
-				<SidebarGroup>
-					<SidebarGroupLabel>Обычное</SidebarGroupLabel>
-					<SidebarGroupContent>
+		<>
+			{user && (
+				<Sidebar>
+					<SidebarHeader>
 						<SidebarMenu>
-							{commonItems.map((item) => (
-								<SidebarMenuItem key={item.title}>
-									<SidebarMenuButton asChild>
-										<Link href={item.url}>
-											<item.icon />
-											<span>{item.title}</span>
-										</Link>
-									</SidebarMenuButton>
-								</SidebarMenuItem>
-							))}
+							<SidebarMenuItem>
+								<Combobox
+									items={comboboxItems}
+									placeholder="Выберите организацию..."
+									defaultValue={organization?.name}
+									className="w-[100%]"
+									onChange={(value) => {
+										if (
+											!value ||
+											!user ||
+											value.toString() == organization?.id.toString()
+										)
+											return;
+										const organizationSearched = user.organizations.find(
+											(o) => o.id == +value
+										);
+										if (!organizationSearched) return;
+										setProject(null);
+										setOrganization(organizationSearched);
+									}}
+								/>
+							</SidebarMenuItem>
 						</SidebarMenu>
-					</SidebarGroupContent>
-				</SidebarGroup>
-				<SidebarGroup>
-					<SidebarGroupLabel>Мое</SidebarGroupLabel>
-					<SidebarGroupContent>
-						<SidebarMenu>
-							{myItems.map((item) => (
-								<SidebarMenuItem key={item.title}>
-									<SidebarMenuButton asChild>
-										<Link href={item.url}>
-											<item.icon />
-											<span>{item.title}</span>
-										</Link>
-									</SidebarMenuButton>
-								</SidebarMenuItem>
-							))}
-						</SidebarMenu>
-					</SidebarGroupContent>
-				</SidebarGroup>
-			</SidebarContent>
-		</Sidebar>
+					</SidebarHeader>
+					<SidebarContent>
+						<SidebarGroup>
+							<SidebarGroupLabel>Обычное</SidebarGroupLabel>
+							<SidebarGroupContent>
+								<SidebarMenu>
+									{commonItems.map((item) => (
+										<SidebarMenuItem key={item.title}>
+											<SidebarMenuButton asChild>
+												<Link href={item.url}>
+													<item.icon />
+													<span>{item.title}</span>
+												</Link>
+											</SidebarMenuButton>
+										</SidebarMenuItem>
+									))}
+								</SidebarMenu>
+							</SidebarGroupContent>
+						</SidebarGroup>
+						<SidebarGroup>
+							<SidebarGroupLabel>Мое</SidebarGroupLabel>
+							<SidebarGroupContent>
+								<SidebarMenu>
+									{myItems.map((item) => (
+										<SidebarMenuItem key={item.title}>
+											<SidebarMenuButton asChild>
+												<Link href={item.url}>
+													<item.icon />
+													<span>{item.title}</span>
+												</Link>
+											</SidebarMenuButton>
+										</SidebarMenuItem>
+									))}
+								</SidebarMenu>
+							</SidebarGroupContent>
+						</SidebarGroup>
+					</SidebarContent>
+				</Sidebar>
+			)}
+		</>
 	);
 }

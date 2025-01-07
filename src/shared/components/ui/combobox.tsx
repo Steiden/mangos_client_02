@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import { Check, ChevronsUpDown } from "lucide-react"
-
-import { cn } from "@/lib/utils"
 import { Button } from "./button" 
 import {
   Command,
@@ -19,6 +17,7 @@ import {
   PopoverTrigger,
 } from "./popover"
 import clsx from "clsx"
+import { cn } from "@/shared/lib/utils"
 
 export type ComboBoxItem = {
     value: string;

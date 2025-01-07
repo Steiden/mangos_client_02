@@ -25,7 +25,8 @@ export const UserBadge = ({
 	return (
 		<div
 			className={clsx(
-				isHover && "px-3 py-0.5 rounded-md transition-colors hover:bg-accent hover:text-accent-foreground",
+				isHover &&
+					"px-3 py-0.5 rounded-md transition-colors hover:bg-accent hover:text-accent-foreground",
 				styles["user-badge"],
 				styles[`user-badge--${direction}`],
 				styles[`user-badge--${size}`],
@@ -40,10 +41,10 @@ export const UserBadge = ({
 					className={clsx(styles["user-badge__image"])}
 				/>
 				<AvatarFallback className={clsx(styles["user-badge__fallback"])}>
-					{user?.login?.split("")[0].toUpperCase()}
+					{user?.login?.[0].toUpperCase()}
 				</AvatarFallback>
 			</Avatar>
-			{type === "name" && (
+			{type === "name" && user?.second_name && user?.first_name && (
 				<span className={clsx(styles["user-badge__name"])}>
 					{user?.second_name} {user?.first_name}
 				</span>

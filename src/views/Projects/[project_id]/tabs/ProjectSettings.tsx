@@ -2,7 +2,7 @@
 
 import { getList as getExecutionStatuses } from "@/entities/ExecutionStatus";
 import { ProjectFillable, update } from "@/entities/Project";
-import { renderField } from "@/features/renderFields";
+import { renderField } from "@/features/renderField";
 import { Button } from "@/shared/components/ui/button";
 import { Label } from "@/shared/components/ui/label";
 import { useOrganizationContext, useProjectContext } from "@/shared/context";

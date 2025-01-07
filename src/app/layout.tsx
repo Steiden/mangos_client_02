@@ -23,7 +23,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
 	title: "Mangos",
-	description: "Website for organization management",
+	description: "Веб-приложение для управления задачами и проектами организации",
 };
 
 export default function RootLayout({

@@ -14,15 +14,15 @@ import { create } from "@/entities/Organization/OrganizationEmployee/api";
 import { OrganizationEmployeeFillable } from "@/entities/Organization/OrganizationEmployee";
 import { useRouter } from "next/navigation";
 import { FormField } from "@/shared/types/form";
-import { renderField } from "@/features/renderFields";
+import { renderField } from "@/features/renderField";
 
 const fields: FormField[] = [
-	{
-		type: "text",
-		id: "full_name",
-		name: "full_name",
-		placeholder: "Полное название организации",
-	},
+	// {
+	// 	type: "text",
+	// 	id: "full_name",
+	// 	name: "full_name",
+	// 	placeholder: "Полное название организации",
+	// },
 	{
 		type: "text",
 		id: "name",
@@ -65,7 +65,7 @@ export const OrganizationsCreate = () => {
 
 	const [data, setData] = useState<OrganizationFillable>({
 		description: "",
-		full_name: "",
+		// full_name: "",
 		name: "",
 		address: "",
 		phone: "",

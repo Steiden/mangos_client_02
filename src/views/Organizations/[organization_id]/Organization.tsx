@@ -10,6 +10,7 @@ import { OrganizationSettings } from "./OrganizationSettings";
 import { OrganizationDivisions } from "./OrganizationDivisions";
 
 export const Organization = () => {
+
 	return (
 		<Tabs orientation="vertical" defaultValue="about" className={clsx(styles["organization"])}>
 			<TabsList className={clsx(styles["organization__tabs"])}>

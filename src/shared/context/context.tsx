@@ -70,7 +70,7 @@ export function MangosContextProvider({ children }: { children: ReactNode }) {
 				setLocalOrganization(null);
 				setLocalProject(null);
 
-				if (pathname !== "/auth/login" && pathname !== "/auth/register")
+				if (pathname !== "/auth/login" && pathname !== "/auth/register" && pathname !== "/")
 					router.push("/auth/login");
 
 				return;

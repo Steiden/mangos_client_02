@@ -15,19 +15,22 @@ export const Mangos = () => {
 	const { updateOrganization } = useOrganizationContext();
 
 	useEffect(() => {
-		if (user) {
-			if (!user?.organizations?.length) {
-				if (pathname === "/organizations/ask" || pathname === "/organizations/create")
-					return;
+		updateTask();
+		updateProject();
+		updateOrganization();
+	}, [user]);
+
+	useEffect(() => {
+		if (
+			new RegExp("^/organizations|/tasks|/projects").test(pathname) &&
+			!new RegExp("/organizations/ask|/organizations/create").test(pathname)
+		) {
+			if (!user?.organizations.length) {
 				router.push("/organizations/ask");
 				return;
 			}
 		}
-
-		updateTask()
-		updateProject();
-		updateOrganization();
-	}, [user]);
+	}, [pathname]);
 
 	return <div id="mangos"></div>;
 };

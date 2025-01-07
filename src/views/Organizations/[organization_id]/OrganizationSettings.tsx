@@ -5,7 +5,7 @@ import { getList as getActivityTypes } from "@/entities/Organization/ActivityTyp
 import { CategoryFillable, CategoryShort, TagShort } from "@/entities/Task";
 import { create as createCategory } from "@/entities/Task/Category";
 import { create as createTag, TagFillable } from "@/entities/Task/Tag";
-import { renderField } from "@/features/renderFields";
+import { renderField } from "@/features/renderField";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
