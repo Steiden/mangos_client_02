@@ -1,6 +1,6 @@
 "use client";
 
-import { me } from "@/entities/auth/api";
+import { me } from "@/entities/Auth/api";
 import { useOrganizationContext, useUserContext } from "@/shared/context";
 import { useProjectContext, useTaskContext } from "@/shared/context/context";
 import { usePathname, useRouter } from "next/navigation";

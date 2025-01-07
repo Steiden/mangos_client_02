@@ -1,7 +1,7 @@
 "use client";
 
-import { TaskMemberFillable } from "@/entities/task";
-import { create } from "@/entities/task/task_member/api";
+import { TaskMemberFillable } from "@/entities/Task";
+import { create } from "@/entities/Task/TaskMember/api";
 import { buttonVariants } from "@/shared/components/ui/button";
 import {
 	Command,

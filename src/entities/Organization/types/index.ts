@@ -1,10 +1,10 @@
-import { UserShort } from "@/entities/user/types";
-import { ActivityType } from "../activity_type/types";
-import { ProjectShort } from "@/entities/project";
-import { CategoryShort, TagShort } from "@/entities/task";
-import { OrganizationEmployee } from "../organization_employee";
-import { Division } from "../division";
-import { PostShort } from "../post";
+import { UserShort } from "@/entities/User/types";
+import { ActivityType } from "../ActivityType/types";
+import { ProjectShort } from "@/entities/Project";
+import { CategoryShort, TagShort } from "@/entities/Task";
+import { OrganizationEmployee } from "../OrganizationEmployee";
+import { Division } from "../Division";
+import { PostShort } from "../Post";
 
 export type Organization = {
     id: number;

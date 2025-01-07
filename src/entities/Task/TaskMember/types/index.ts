@@ -1,4 +1,4 @@
-import { UserShort } from "@/entities/user/types";
+import { UserShort } from "@/entities/User/types";
 import { TaskShort } from "../../types";
 
 export type TaskMember = {

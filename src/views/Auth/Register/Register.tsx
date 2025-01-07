@@ -7,9 +7,9 @@ import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Button } from "@/shared/components/ui/button";
 import { useState } from "react";
-import { register } from "@/entities/auth/api";
+import { register } from "@/entities/Auth/api";
 import { useRouter } from "next/navigation";
-import { RegistrationData } from "@/entities/auth/types";
+import { RegistrationData } from "@/entities/Auth/types";
 import { useToast } from "@/shared/hooks/use-toast";
 
 const formInfo: React.InputHTMLAttributes<HTMLInputElement>[] = [

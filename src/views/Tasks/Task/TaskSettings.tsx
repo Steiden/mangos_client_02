@@ -1,9 +1,9 @@
 "use client";
 
-import { getList as getExecutionStatuses } from "@/entities/execution_status";
-import { getList as getTaskPriorities } from "@/entities/task/task_priority";
-import { getList as getCategories } from "@/entities/task/category";
-import { TaskFillable, update } from "@/entities/task";
+import { getList as getExecutionStatuses } from "@/entities/ExecutionStatus";
+import { getList as getTaskPriorities } from "@/entities/Task/TaskPriority";
+import { getList as getCategories } from "@/entities/Task/Category";
+import { TaskFillable, update } from "@/entities/Task";
 import { renderField } from "@/features/renderField";
 import { Button } from "@/shared/components/ui/button";
 import { useOrganizationContext, useProjectContext } from "@/shared/context";

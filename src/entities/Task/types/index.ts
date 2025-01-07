@@ -1,9 +1,9 @@
-import { ExecutionStatus } from "@/entities/execution_status/types";
-import { TaskPriority } from "../task_priority/types";
-import { CategoryShort } from "../category/types";
-import { UserShort } from "@/entities/user/types";
-import { ProjectShort } from "@/entities/project/types";
-import { TaskMember } from "../task_member";
+import { ExecutionStatus } from "@/entities/ExecutionStatus/types";
+import { TaskPriority } from "../TaskPriority/types";
+import { CategoryShort } from "../Category/types";
+import { UserShort } from "@/entities/User/types";
+import { ProjectShort } from "@/entities/Project/types";
+import { TaskMember } from "../TaskMember";
 
 export type Task = {
     id: number;

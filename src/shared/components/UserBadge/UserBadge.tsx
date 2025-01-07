@@ -3,7 +3,7 @@
 import styles from "./UserBadge.module.scss";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar";
 import clsx from "clsx";
-import { User, UserFillable, UserShort } from "@/entities/user";
+import { User, UserFillable, UserShort } from "@/entities/User";
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
 	type?: "avatar" | "name";

@@ -1,6 +1,6 @@
 "use client";
 
-import { ProjectMember } from "@/entities/project";
+import { ProjectMember } from "@/entities/Project";
 import styles from "./UserMemberCard.module.scss";
 import clsx from "clsx";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/components/ui/popover";
@@ -10,12 +10,12 @@ import { useLocalStorage } from "usehooks-ts";
 import { useToast } from "@/shared/hooks/use-toast";
 import { useOrganizationContext, useProjectContext, useUserContext } from "@/shared/context";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar";
-import { OrganizationEmployee, OrganizationEmployeeFillable } from "@/entities/organization/organization_employee";
-import { TaskMember } from "@/entities/task";
+import { OrganizationEmployee, OrganizationEmployeeFillable } from "@/entities/Organization/OrganizationEmployee";
+import { TaskMember } from "@/entities/Task";
 import { useTaskContext } from "@/shared/context/context";
-import { remove as removeTaskMember } from "@/entities/task/task_member/api";
-import { remove as removeProjectMember } from "@/entities/project/project_member/api";
-import { remove as removeOrganizationMember, update } from "@/entities/organization/organization_employee/api";
+import { remove as removeTaskMember } from "@/entities/Task/TaskMember/api";
+import { remove as removeProjectMember } from "@/entities/Project/ProjectMember/api";
+import { remove as removeOrganizationMember, update } from "@/entities/Organization/OrganizationEmployee/api";
 import {
 	Dialog,
 	DialogContent,

@@ -1,4 +1,4 @@
-import { DivisionShort } from "../../division/types";
+import { DivisionShort } from "../../Division/types";
 
 export type Post = {
     id: number;

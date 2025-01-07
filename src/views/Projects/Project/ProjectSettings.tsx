@@ -1,7 +1,7 @@
 "use client";
 
-import { getList as getExecutionStatuses } from "@/entities/execution_status";
-import { ProjectFillable, update } from "@/entities/project";
+import { getList as getExecutionStatuses } from "@/entities/ExecutionStatus";
+import { ProjectFillable, update } from "@/entities/Project";
 import { renderField } from "@/features/renderField";
 import { Button } from "@/shared/components/ui/button";
 import { useOrganizationContext, useProjectContext } from "@/shared/context";

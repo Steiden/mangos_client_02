@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import { AuthorizationData, AuthorizationResponse, RegistrationData } from "../types";
 import { api, endpoints, getAxiosConfig, MangosResponse } from "@/shared/api";
-import { User } from "@/entities/user/types";
+import { User } from "@/entities/User/types";
 import { handleResponseException } from "@/shared/api/handlers";
 
 export async function login(data: AuthorizationData): Promise<MangosResponse<AuthorizationResponse>> {

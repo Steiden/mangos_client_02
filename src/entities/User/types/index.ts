@@ -1,4 +1,4 @@
-import { Organization } from "@/entities/organization";
+import { Organization } from "@/entities/Organization";
 import { Role } from "../Role/types";
 
 export type User = {

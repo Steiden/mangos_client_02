@@ -1,8 +1,8 @@
-import { ExecutionStatus } from "@/entities/execution_status/types";
-import { OrganizationShort } from "@/entities/organization/types";
-import { TaskMiddle } from "@/entities/task/types";
-import { UserShort } from "@/entities/user/types";
-import { ProjectMember } from "../project_member";
+import { ExecutionStatus } from "@/entities/ExecutionStatus/types";
+import { OrganizationShort } from "@/entities/Organization/types";
+import { TaskMiddle } from "@/entities/Task/types";
+import { UserShort } from "@/entities/User/types";
+import { ProjectMember } from "../ProjectMember";
 
 export type Project = {
     id: number;

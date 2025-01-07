@@ -1,4 +1,4 @@
-import { OrganizationShort } from "@/entities/organization/types";
+import { OrganizationShort } from "@/entities/Organization/types";
 
 export type Category = {
     id: number;

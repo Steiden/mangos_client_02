@@ -11,14 +11,12 @@ import {
 	useState,
 } from "react";
 import { MangosContextType } from "./types";
-import { User } from "@/entities/user/types";
-import { Organization } from "@/entities/organization/types";
-import { Project } from "@/entities/project/types";
-import { me } from "@/entities/auth/api";
+import { User } from "@/entities/User/types";
+import { me } from "@/entities/Auth/api";
 import { useLocalStorage } from "usehooks-ts";
-import { get as getOrganization } from "@/entities/organization";
-import { get as getProject } from "@/entities/project";
-import { get as getTask, Task } from "@/entities/task";
+import { get as getOrganization, Organization } from "@/entities/Organization";
+import { get as getProject, Project } from "@/entities/Project";
+import { get as getTask, Task } from "@/entities/Task";
 
 export const MangosContext = createContext<{
 	data: MangosContextType;

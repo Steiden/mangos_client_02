@@ -13,13 +13,13 @@ import {
 	TaskFillable,
 	TaskMemberFillable,
 	TaskPriority,
-} from "@/entities/task";
+} from "@/entities/Task";
 import { useOrganizationContext, useProjectContext, useUserContext } from "@/shared/context";
-import { create as createTaskMember } from "@/entities/task/task_member";
+import { create as createTaskMember } from "@/entities/Task/TaskMember";
 import { FormField } from "@/shared/types/form";
 import { renderField } from "@/features/renderField";
 import { ExecutionStatuses } from "@/shared/api/constants";
-import { getList as getTaskPriorities } from "@/entities/task/task_priority";
+import { getList as getTaskPriorities } from "@/entities/Task/TaskPriority";
 
 export const TasksCreate = () => {
 	const router = useRouter();
