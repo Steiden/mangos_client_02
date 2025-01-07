@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import styles from "./OrganizationsAsk.module.scss";
+import styles from "./OrganizationAsk.module.scss";
 import { Button } from "@/shared/components/ui/button";
 import { useRouter } from "next/navigation";
 

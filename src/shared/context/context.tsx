@@ -11,15 +11,15 @@ import {
 	useState,
 } from "react";
 import { MangosContextType } from "./types";
-import { User } from "@/entities/User/types";
-import { Organization } from "@/entities/Organization/types";
-import { Project } from "@/entities/Project/types";
-import { me } from "@/entities/Auth/api";
+import { User } from "@/entities/user/types";
+import { Organization } from "@/entities/organization/types";
+import { Project } from "@/entities/project/types";
+import { me } from "@/entities/auth/api";
 import { useLocalStorage } from "usehooks-ts";
 import { usePathname, useRouter } from "next/navigation";
-import { get as getOrganization } from "@/entities/Organization";
-import { get as getProject } from "@/entities/Project";
-import { get as getTask, Task } from "@/entities/Task";
+import { get as getOrganization } from "@/entities/organization";
+import { get as getProject } from "@/entities/project";
+import { get as getTask, Task } from "@/entities/task";
 
 export const MangosContext = createContext<{
 	data: MangosContextType;

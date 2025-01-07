@@ -1,6 +1,6 @@
 "use client";
 
-import { create, ProjectMemberFillable } from "@/entities/Project/ProjectMember";
+import { create, ProjectMemberFillable } from "@/entities/project/project_member";
 import { buttonVariants } from "@/shared/components/ui/button";
 import {
 	Command,

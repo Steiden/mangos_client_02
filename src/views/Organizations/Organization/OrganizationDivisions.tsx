@@ -1,7 +1,7 @@
 "use client";
 
-import { create as createDivision, DivisionFillable } from "@/entities/Organization/Division";
-import { create as createPost, PostFillable } from "@/entities/Organization/Post";
+import { create as createDivision, DivisionFillable } from "@/entities/organization/division";
+import { create as createPost, PostFillable } from "@/entities/organization/post";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button, buttonVariants } from "@/shared/components/ui/button";
 import {

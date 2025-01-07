@@ -11,8 +11,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/shared/components/ui/
 import { UserBadge } from "@/shared/components/UserBadge/UserBadge";
 import { LogOutIcon, SettingsIcon, UserRoundIcon } from "lucide-react";
 import { useLocalStorage } from "usehooks-ts";
-import { Project } from "@/entities/Project";
-import { User } from "@/entities/User";
+import { Project } from "@/entities/project";
+import { User } from "@/entities/user";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export const Header = () => {

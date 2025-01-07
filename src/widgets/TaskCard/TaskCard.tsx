@@ -10,7 +10,7 @@ import {
 	CardDescription,
 } from "@/shared/components/ui/card";
 import styles from "./TaskCard.module.scss";
-import { get, remove } from "@/entities/Task";
+import { get, remove } from "@/entities/task";
 import { Popover, PopoverTrigger } from "@/shared/components/ui/popover";
 import { EllipsisVerticalIcon, EyeIcon, Trash2Icon } from "lucide-react";
 import { PopoverContent } from "@radix-ui/react-popover";
@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 import { useLocalStorage } from "usehooks-ts";
 import { useToast } from "@/shared/hooks/use-toast";
 import { useProjectContext } from "@/shared/context";
-import { TaskMiddle } from "@/entities/Task/types";
+import { TaskMiddle } from "@/entities/task/types";
 import { useTaskContext } from "@/shared/context/context";
 import { UserBadge } from "@/shared/components/UserBadge/UserBadge";
 

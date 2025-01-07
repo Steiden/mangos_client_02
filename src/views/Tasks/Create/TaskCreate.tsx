@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import styles from "./TasksCreate.module.scss";
+import styles from "./TaskCreate.module.scss";
 import { Button } from "@/shared/components/ui/button";
 import { Label } from "@/shared/components/ui/label";
 import { useEffect, useState } from "react";
@@ -14,13 +14,13 @@ import {
 	TaskFillable,
 	TaskMemberFillable,
 	TaskPriority,
-} from "@/entities/Task";
+} from "@/entities/task";
 import { useOrganizationContext, useProjectContext, useUserContext } from "@/shared/context";
-import { create as createTaskMember } from "@/entities/Task/TaskMember";
+import { create as createTaskMember } from "@/entities/task/task_member";
 import { FormField } from "@/shared/types/form";
 import { renderField } from "@/features/renderField";
 import { ExecutionStatuses } from "@/shared/api/constants";
-import { getList as getTaskPriorities } from "@/entities/Task/TaskPriority";
+import { getList as getTaskPriorities } from "@/entities/task/task_priority";
 
 const fields: FormField[] = [
 	{

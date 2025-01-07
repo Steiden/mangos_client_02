@@ -1,7 +1,7 @@
-import { Organization } from "@/entities/Organization/types";
-import { Project } from "@/entities/Project/types";
-import { Task } from "@/entities/Task";
-import { User } from "@/entities/User/types";
+import { Organization } from "@/entities/organization/types";
+import { Project } from "@/entities/project/types";
+import { Task } from "@/entities/task";
+import { User } from "@/entities/user/types";
 
 export type MangosContextType = {
     user: User | null;

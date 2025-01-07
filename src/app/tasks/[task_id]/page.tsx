@@ -1,4 +1,4 @@
-import { Task } from "@/views/Tasks/[task_id]/Task.module";
+import { Task } from "@/views/Tasks/Task/Task.module";
 
 export function generateStaticParams() {
 	return [{ id: "test" }];

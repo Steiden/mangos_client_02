@@ -1,6 +1,6 @@
-import { UserShort } from "@/entities/User/types";
+import { UserShort } from "@/entities/user/types";
 import { OrganizationShort } from "../../types";
-import { PostShort } from "../../Post/types";
+import { PostShort } from "../../post/types";
 
 export type OrganizationEmployee = {
     id: number;

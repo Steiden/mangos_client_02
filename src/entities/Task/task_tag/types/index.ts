@@ -1,4 +1,4 @@
-import { TagShort } from "../../Tag/types";
+import { TagShort } from "../../tag/types";
 import { TaskShort } from "../../types";
 
 export type TaskTag = {

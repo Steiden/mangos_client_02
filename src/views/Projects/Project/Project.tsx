@@ -3,9 +3,9 @@
 import styles from "./Project.module.scss";
 import clsx from "clsx";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
-import { ProjectInfo } from "./tabs/ProjectInfo";
-import { ProjectMembers } from "./tabs/ProjectMembers";
-import { ProjectSettings } from "./tabs/ProjectSettings";
+import { ProjectInfo } from "./ProjectInfo";
+import { ProjectMembers } from "./ProjectMembers";
+import { ProjectSettings } from "./ProjectSettings";
 import { BadgeInfoIcon, SettingsIcon, UserIcon } from "lucide-react";
 
 export const Project = () => {

@@ -1,4 +1,4 @@
-import { OrganizationShort } from "@/entities/Organization/types";
+import { OrganizationShort } from "@/entities/organization/types";
 
 export type Tag = {
 	id: number;

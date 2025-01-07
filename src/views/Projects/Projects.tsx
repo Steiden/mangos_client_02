@@ -13,11 +13,11 @@ import {
 } from "@/shared/components/ui/table";
 import { useOrganizationContext, useProjectContext } from "@/shared/context";
 import { useEffect, useState } from "react";
-import { ExecutionStatus, getList } from "@/entities/ExecutionStatus";
+import { ExecutionStatus, getList } from "@/entities/execution_status";
 import { useLocalStorage } from "usehooks-ts";
 import { Button } from "@/shared/components/ui/button";
 import { useRouter } from "next/navigation";
-import { get } from "@/entities/Project";
+import { get } from "@/entities/project";
 import { useToast } from "@/shared/hooks/use-toast";
 
 export const Projects = () => {

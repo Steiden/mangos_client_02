@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import styles from "./ProjectsCreate.module.scss";
+import styles from "./ProjectCreate.module.scss";
 import { Button } from "@/shared/components/ui/button";
 import { Label } from "@/shared/components/ui/label";
 import { Input } from "@/shared/components/ui/input";
@@ -10,9 +10,9 @@ import { useLocalStorage } from "usehooks-ts";
 import { useToast } from "@/shared/hooks/use-toast";
 import { useOrganizationContext, useUserContext } from "@/shared/context";
 import { useRouter } from "next/navigation";
-import { create as createProject, ProjectFillable } from "@/entities/Project";
+import { create as createProject, ProjectFillable } from "@/entities/project";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { create, ProjectMemberFillable } from "@/entities/Project/ProjectMember";
+import { create, ProjectMemberFillable } from "@/entities/project/project_member";
 import { ExecutionStatuses } from "@/shared/api/constants";
 
 export const ProjectsCreate = () => {

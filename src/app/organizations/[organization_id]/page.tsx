@@ -1,4 +1,4 @@
-import { Organization } from "@/views/Organizations/[organization_id]/Organization";
+import { Organization } from "@/views/Organizations/Organization/Organization";
 
 export function generateStaticParams() {
 	return [{ id: "test" }];

@@ -1,10 +1,10 @@
 "use client";
 
-import { OrganizationFillable, update } from "@/entities/Organization";
-import { getList as getActivityTypes } from "@/entities/Organization/ActivityType";
-import { CategoryFillable, CategoryShort, TagShort } from "@/entities/Task";
-import { create as createCategory } from "@/entities/Task/Category";
-import { create as createTag, TagFillable } from "@/entities/Task/Tag";
+import { OrganizationFillable, update } from "@/entities/organization";
+import { getList as getActivityTypes } from "@/entities/organization/activity_type";
+import { CategoryFillable, CategoryShort, TagShort } from "@/entities/task";
+import { create as createCategory } from "@/entities/task/category";
+import { create as createTag, TagFillable } from "@/entities/task/tag";
 import { renderField } from "@/features/renderField";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";

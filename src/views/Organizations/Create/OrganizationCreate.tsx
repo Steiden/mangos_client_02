@@ -1,17 +1,17 @@
 "use client";
 
 import clsx from "clsx";
-import styles from "./OrganizationsCreate.module.scss";
+import styles from "./OrganizationCreate.module.scss";
 import { Button } from "@/shared/components/ui/button";
 import { Label } from "@/shared/components/ui/label";
 import { useEffect, useState } from "react";
-import { create as createOrganization, OrganizationFillable } from "@/entities/Organization";
+import { create as createOrganization, OrganizationFillable } from "@/entities/organization";
 import { useLocalStorage } from "usehooks-ts";
 import { useToast } from "@/shared/hooks/use-toast";
-import { ActivityType, getList } from "@/entities/Organization/ActivityType";
+import { ActivityType, getList } from "@/entities/organization/activity_type";
 import { useOrganizationContext, useUserContext } from "@/shared/context";
-import { create } from "@/entities/Organization/OrganizationEmployee/api";
-import { OrganizationEmployeeFillable } from "@/entities/Organization/OrganizationEmployee";
+import { create } from "@/entities/organization/organization_employee/api";
+import { OrganizationEmployeeFillable } from "@/entities/organization/organization_employee";
 import { useRouter } from "next/navigation";
 import { FormField } from "@/shared/types/form";
 import { renderField } from "@/features/renderField";

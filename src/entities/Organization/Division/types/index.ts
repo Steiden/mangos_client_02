@@ -1,4 +1,4 @@
-import { PostShort } from "../../Post";
+import { PostShort } from "../../post";
 import { OrganizationShort } from "../../types";
 
 export type Division = {
