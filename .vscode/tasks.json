@@ -10,6 +10,17 @@
 			"presentation": {
 				"reveal": "silent"
 			}
+		},
+		{
+			"label": "Run Dev Server",
+			"type": "shell",
+			"command": "npm run dev",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"detail": "Автоматический запуск команды npm run dev"
 		}
 	]
 }
