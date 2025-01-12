@@ -100,7 +100,7 @@ export const ProjectMembers = () => {
 												>
 													<UserMemberCard
 														member={member}
-														isActions={false}
+														showActions={false}
 														size="small"
 														className="cursor-pointer"
 														onClick={() =>

@@ -15,30 +15,10 @@ import {
 import { Combobox, ComboBoxItem } from "@/shared/components/ui/combobox";
 import Link from "next/link";
 import { useOrganizationContext, useProjectContext, useUserContext } from "@/shared/context";
-
-const commonItems = [
-	{
-		title: "Проекты",
-		url: "/projects",
-		icon: PanelsTopLeft,
-	},
-	{
-		title: "Задачи",
-		url: "/tasks",
-		icon: ClipboardList,
-	},
-];
-
-const myItems = [
-	{
-		title: "Моя организация",
-		url: "/organizations/my",
-		icon: Building,
-	},
-];
+import { SidebarItem } from "./types";
 
 export function AppSidebar() {
-	const { setProject } = useProjectContext();
+	const { project, setProject } = useProjectContext();
 	const { organization, setOrganization } = useOrganizationContext();
 	const { user } = useUserContext();
 
@@ -50,6 +30,30 @@ export function AppSidebar() {
 				};
 		  })
 		: [];
+
+	const commonItems: SidebarItem[] = [
+		{
+			title: "Проекты",
+			url: "/projects",
+			icon: PanelsTopLeft,
+			isVisible: !!organization,
+		},
+		{
+			title: "Задачи",
+			url: "/tasks",
+			icon: ClipboardList,
+			isVisible: !!project,
+		},
+	];
+
+	const myItems: SidebarItem[] = [
+		{
+			title: "Моя организация",
+			url: "/organizations/my",
+			icon: Building,
+			isVisible: !!organization,
+		},
+	];
 
 	return (
 		<>
@@ -82,40 +86,51 @@ export function AppSidebar() {
 						</SidebarMenu>
 					</SidebarHeader>
 					<SidebarContent>
-						<SidebarGroup>
-							<SidebarGroupLabel>Обычное</SidebarGroupLabel>
-							<SidebarGroupContent>
-								<SidebarMenu>
-									{commonItems.map((item) => (
-										<SidebarMenuItem key={item.title}>
-											<SidebarMenuButton asChild>
-												<Link href={item.url}>
-													<item.icon />
-													<span>{item.title}</span>
-												</Link>
-											</SidebarMenuButton>
-										</SidebarMenuItem>
-									))}
-								</SidebarMenu>
-							</SidebarGroupContent>
-						</SidebarGroup>
-						<SidebarGroup>
-							<SidebarGroupLabel>Мое</SidebarGroupLabel>
-							<SidebarGroupContent>
-								<SidebarMenu>
-									{myItems.map((item) => (
-										<SidebarMenuItem key={item.title}>
-											<SidebarMenuButton asChild>
-												<Link href={item.url}>
-													<item.icon />
-													<span>{item.title}</span>
-												</Link>
-											</SidebarMenuButton>
-										</SidebarMenuItem>
-									))}
-								</SidebarMenu>
-							</SidebarGroupContent>
-						</SidebarGroup>
+						{!!myItems.find((item) => item.isVisible) && (
+							<SidebarGroup>
+								<SidebarGroupLabel>Обычное</SidebarGroupLabel>
+								<SidebarGroupContent>
+									<SidebarMenu>
+										{commonItems.map(
+											(item) =>
+												item.isVisible && (
+													<SidebarMenuItem key={item.title}>
+														<SidebarMenuButton asChild>
+															<Link href={item.url}>
+																<item.icon />
+																<span>{item.title}</span>
+															</Link>
+														</SidebarMenuButton>
+													</SidebarMenuItem>
+												)
+										)}
+									</SidebarMenu>
+								</SidebarGroupContent>
+							</SidebarGroup>
+						)}
+
+						{!!myItems.find((item) => item.isVisible) && (
+							<SidebarGroup>
+								<SidebarGroupLabel>Мое</SidebarGroupLabel>
+								<SidebarGroupContent>
+									<SidebarMenu>
+										{myItems.map(
+											(item) =>
+												item.isVisible && (
+													<SidebarMenuItem key={item.title}>
+														<SidebarMenuButton asChild>
+															<Link href={item.url}>
+																<item.icon />
+																<span>{item.title}</span>
+															</Link>
+														</SidebarMenuButton>
+													</SidebarMenuItem>
+												)
+										)}
+									</SidebarMenu>
+								</SidebarGroupContent>
+							</SidebarGroup>
+						)}
 					</SidebarContent>
 				</Sidebar>
 			)}

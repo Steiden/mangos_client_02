@@ -46,15 +46,16 @@ export const Mangos = () => {
 	}, [user]);
 
 	useEffect(() => {
-		if (
-			new RegExp("^/organizations|/tasks|/projects").test(pathname) &&
-			!new RegExp("/organizations/ask|/organizations/create").test(pathname)
-		) {
-			if (!user?.organizations.length) {
-				router.push("/organizations/ask");
-				return;
-			}
-		}
+		// TODO Исправить работу и раскомментировать
+		// if (
+		// 	new RegExp("^/organizations|/tasks|/projects").test(pathname) &&
+		// 	!new RegExp("/organizations/ask|/organizations/create").test(pathname)
+		// ) {
+		// 	if (!user?.organizations.length) {
+		// 		router.push("/organizations/ask");
+		// 		return;
+		// 	}
+		// }
 	}, [pathname]);
 
 	return <div id="mangos"></div>;
