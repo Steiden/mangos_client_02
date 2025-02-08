@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = 'http://127.0.0.1:8000/api';
+// const BASE_URL = 'http://127.0.0.1:8000/api';
+const BASE_URL = 'http://backend-mangos.steiden.ru:8080/api';
 
 export enum Roles {
     admin = 1,
